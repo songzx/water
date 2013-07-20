@@ -11,6 +11,11 @@
 		<description>初始应用环境变量</description>
 		<listener-class>com.water.listener.WaterInitListener</listener-class>
 	</listener>
+	
+	<listener>
+		<description>在线用户session监听</description>
+		<listener-class>com.water.basictool.OnlineAccountListener</listener-class>
+	</listener>
 
 	<filter>
 		<description>gtdadmin后台过滤器</description>
@@ -26,7 +31,23 @@
 		<servlet-name>logservlet</servlet-name>
 		<servlet-class>com.example.logexample.LogServlet</servlet-class>
 	</servlet>
+<servlet>
+		<servlet-name>accountservlet</servlet-name>
+		<servlet-class>com.ucap.web.servlet.AccountServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>outinterfaceservlet</servlet-name>
+		<servlet-class>com.ucap.web.outInterface.cxf.OutInterfaceServlet</servlet-class>
+	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>outinterfaceservlet</servlet-name>
+		<url-pattern>/outinterfaceservlet/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>accountservlet</servlet-name>
+		<url-pattern>/accountservlet.servlet</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>logservlet</servlet-name>
 		<url-pattern>/logservlet.servlet</url-pattern>
@@ -38,7 +59,15 @@
 	</icon>
 	<error-page>
 		<error-code>404</error-code>
-		<location>/404.html</location>
+		<location>/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error/403.jsp</location>
 	</error-page>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

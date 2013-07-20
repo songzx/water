@@ -10,9 +10,9 @@
 		<class>com.water.metamodel.account.AccountWeb</class>
 		<class>com.water.metamodel.account.AccountLog</class>
 		<class>com.water.metamodel.account.AccountOperatorLog</class>
-		
 		<class>com.water.metamodel.tree.Category</class>
-
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		
 		<properties>
 			<property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@127.0.0.1:1521:ORCLGBK" />
 			<property name="openjpa.ConnectionDriverName" value="oracle.jdbc.driver.OracleDriver" />

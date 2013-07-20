@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "AUTH_ACCOUNT_LOG")
 public class AccountLog {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(length = 50)
@@ -34,6 +34,7 @@ public class AccountLog {
 	@JoinColumn(name = "accountid", nullable = false)
 	@Column(length=50)
 	private Account account;
+	private String accountname;// 便于性能
 
 	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "accountLog")
 	private Set<AccountOperatorLog> accountOperatorLogs;
@@ -92,6 +93,14 @@ public class AccountLog {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public String getAccountname() {
+		return accountname;
+	}
+
+	public void setAccountname(String accountname) {
+		this.accountname = accountname;
 	}
 
 }

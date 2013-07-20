@@ -1,4 +1,11 @@
+<%@page import="com.water.basictool.OnlineAccount"%>
+<%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+	Map<String, String> loginaccount = (Map<String, String>) session.getAttribute("loginaccount");
+	System.out.println(OnlineAccount.getInstance().getWebUsersMap().toString());
+	String[] onlines = OnlineAccount.getInstance().getWebUsersMap().get(loginaccount.get("id"));
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

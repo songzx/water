@@ -29,6 +29,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.water.metamodel.account.Account;
+import com.water.metamodel.account.AccountAdmin;
+
 /**
  * 生成元模型命令(jdk1.6+):javac -classpath path/to/openjpa-all.jar
  * -Aopenjpa.metamodel=true mypackage/MyEntity.java 注：该命令生成的代码在该运行命令行的目录下
@@ -52,6 +55,22 @@ public class QueryTest {
 
 	@Test
 	public void testQuery1() {
-		
+		try {
+			entityManager.getTransaction().begin();
+			Account account = new Account();
+			AccountAdmin accountAdmin = new AccountAdmin();
+			account.setLogincode("admin");
+			account.setLoginpasswd( "passwd");
+			account.setAccounttype(Account.ACCOUNT_TYPE_ADMIN);
+			
+			accountAdmin.setEmail("360898142@qq.com");
+			//account.setAccountAdmin(accountAdmin);
+			
+			entityManager.persist(account);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
