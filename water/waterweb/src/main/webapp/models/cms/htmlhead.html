@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>${htmltile}</title>
+<meta name="Keywords" content="${htmlkeywords}" />
+<meta name="Description" content="${htmldescription}" />
+<link href="favicon.ico" rel="icon" type="image/x-icon" />
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="favicon.ico" rel="bookmark" type="image/x-icon" />
+<#if jspaths?exists>
+<#list jspaths as jspath>
+	<#if jspath?exists>
+<script type="text/javascript" src="${jspath}"></script>	
+	</#if>
+</#list>
+</#if>
+<#if csspaths?exists>
+<#list csspaths as csspath>
+	<#if js?exists>
+<script type="text/javascript" src="${csspath}"></script>	
+	</#if>
+</#list>
+</#if>

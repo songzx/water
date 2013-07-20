@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>gtdweb</display-name>
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<listener>
+		<description>初始应用环境变量</description>
+		<listener-class>com.water.listener.WaterInitListener</listener-class>
+	</listener>
+
+	<filter>
+		<description>gtdadmin后台过滤器</description>
+		<filter-name>wateradminfilter</filter-name>
+		<filter-class>com.water.filter.WaterAdminFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>wateradminfilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>logservlet</servlet-name>
+		<servlet-class>com.example.logexample.LogServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>logservlet</servlet-name>
+		<url-pattern>/logservlet.servlet</url-pattern>
+	</servlet-mapping>
+
+	<icon>
+		<small-icon>small.gif</small-icon>
+		<large-icon>large.gif</large-icon>
+	</icon>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+	</welcome-file-list>
+</web-app>
