@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.water.metamodel.tree.Category"%>
+<%@page import="java.util.List"%>
 <%@page import="com.water.basictool.OnlineAccount"%>
 <%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -5,6 +8,9 @@
 	Map<String, String> loginaccount = (Map<String, String>) session.getAttribute("loginaccount");
 	System.out.println(OnlineAccount.getInstance().getWebUsersMap().toString());
 	String[] onlines = OnlineAccount.getInstance().getWebUsersMap().get(loginaccount.get("id"));
+	
+	List<Category> categorys = request.getAttribute("categorys")==null?new ArrayList<Category>():(List<Category>)request.getAttribute("categorys");
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -82,7 +88,7 @@
 
 <script type="text/javascript">
 $(function(){
-	DWZ.init("dwz.frag.xml", {
+	DWZ.init("/waterweb/admin/dwz.frag.xml", {
 		loginUrl:"login_dialog.html", 
 		loginTitle:"登录",	// 弹出登录对话框
 //		loginUrl:"login.html",	// 跳到登录页面
@@ -98,6 +104,7 @@ $(function(){
 	//初始化菜单
 	$.post(encodeURI($('#navMenu').find('li').eq(0).find('a').eq(0).attr("href")),{},function(html){
 		$("#sidebar").find(".accordion").remove().end().append(html);
+		$('#navMenu').find('li').eq(0).addClass("selected");
 	});
 		
 });
@@ -113,7 +120,7 @@ $(function(){
 				<ul class="nav">
 					<li><a href="javascript:">欢迎你，admin</a></li>
 					<li><a href="changepwd.html" target="dialog" width="600">设置</a></li>
-					<li><a href="login.html">退出</a></li>
+					<li><a href="/waterweb/accountservlet.servlet?method=loginout">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
 					<li theme="default"><div class="selected">蓝色</div></li>
@@ -127,11 +134,11 @@ $(function(){
 
 			<div id="navMenu">
 				<ul>
-					<li class="selected"><a href="/waterweb/admin/navmenu.jsp?menuid=1&menuname=资讯管理"><span>资讯管理</span></a></li>
-					<li><a href="/waterweb/admin/navmenu.jsp?menuid=2"><span>订单管理</span></a></li>
-					<li><a href="sidebar_2.html"><span>会员管理</span></a></li>
-					<li><a href="sidebar_1.html"><span>服务管理</span></a></li>
-					<li><a href="/waterweb/admin/navmenu.jsp?menuid=3&menuname=系统设置"><span>系统设置</span></a></li>
+					<%
+					for(Category category : categorys){
+					%>
+					<li><a href="/waterweb/categoryservlet.servlet?method=cagetorylistbyaccount&menuid=<%=category.getId() %>&menuname=<%=category.getName() %>"><span><%=category.getName() %></span></a></li>
+					<%} %>
 				</ul>
 			</div>
 			<!-- navMenu -->

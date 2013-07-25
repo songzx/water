@@ -23,7 +23,10 @@ import org.slf4j.LoggerFactory;
  * ,HttpSessionAttributeListener 
  */
 public class OnlineAccountListener implements HttpSessionListener{
-	private Logger logger = LoggerFactory.getLogger(OnlineAccountListener.class);
+	private static Logger logger = null;
+	
+	public OnlineAccountListener(){
+	}
 	
 	/**
 	 * 创建session之前
@@ -44,6 +47,9 @@ public class OnlineAccountListener implements HttpSessionListener{
 	 * 触发条件:session.invalidate();
 	 */
 	public void sessionDestroyed(HttpSessionEvent event) {
+		if(logger == null){
+			logger = LoggerFactory.getLogger(OnlineAccountListener.class);
+		}
 		HttpSession session = event.getSession();
 		Enumeration<String> e = session.getAttributeNames();
 		while(e.hasMoreElements()){

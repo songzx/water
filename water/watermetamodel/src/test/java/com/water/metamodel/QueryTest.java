@@ -1,36 +1,17 @@
 package com.water.metamodel;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Tuple;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.persistence.criteria.SetJoin;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 
-import org.apache.openjpa.persistence.criteria.ComparisonStyle;
-import org.apache.openjpa.persistence.criteria.CriteriaBuilderImpl;
-import org.apache.openjpa.persistence.meta.MetamodelImpl;
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.water.metamodel.account.Account;
 import com.water.metamodel.account.AccountAdmin;
+import com.water.metamodel.tree.Category;
 
 /**
  * 生成元模型命令(jdk1.6+):javac -classpath path/to/openjpa-all.jar
@@ -49,8 +30,12 @@ public class QueryTest {
 
 	@Before
 	public void init() {
+		try{
 		entityManagerFactory = Persistence.createEntityManagerFactory("authorityunit");
 		entityManager = entityManagerFactory.createEntityManager();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 	}
 
 	@Test
@@ -72,5 +57,12 @@ public class QueryTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testQuery2(){
+		entityManager.getTransaction().begin();
+		List<Category> categorys = entityManager.createQuery("select category from Category category", Category.class).getResultList();
+		entityManager.getTransaction().commit();
 	}
 }

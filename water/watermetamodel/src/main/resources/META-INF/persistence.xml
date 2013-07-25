@@ -3,49 +3,33 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="authorityunit">
-		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+
 		<class>com.water.metamodel.account.Account</class>
 		<class>com.water.metamodel.account.AccountAdmin</class>
 		<class>com.water.metamodel.account.AccountWeb</class>
 		<class>com.water.metamodel.account.AccountLog</class>
 		<class>com.water.metamodel.account.AccountOperatorLog</class>
-		
+
 		<class>com.water.metamodel.tree.Category</class>
 
 		<properties>
-			<property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@127.0.0.1:1521:ORCLGBK" />
-			<property name="openjpa.ConnectionDriverName" value="oracle.jdbc.driver.OracleDriver" />
-			<property name="openjpa.ConnectionUserName" value="water" />
-			<property name="openjpa.ConnectionPassword" value="water" />
-			<property name="openjpa.Multithreaded" value="true" />
-			<property name="hbm2ddl.auto" value="create" />
-			<property name="openjpa.MetaDataRepository" value="Preload=true" />
-			<property name="openjpa.DynamicEnhancementAgent" value="false" />
-			<!-- Possible values: supported, unsupported, warn Description: The RuntimeUnenhancedClasses 
-				property controls how OpenJPA handles classes that have not been enhanced 
-				by the PCEnhancer tool or automatically by a javaagent. If RuntimeUnenhancedClasses 
-				is set to supported OpenJPA will automatically create subclasses for unenhanced 
-				entity classes. If set to unsupported OpenJPA will not create subclasses 
-				for unenhanced entity classes and will throw an exception when they are detected. 
-				If set to warn OpenJPA will not create subclasses for unenhanced entity classes 
-				but will log a warning message. -->
-			<property name="openjpa.RuntimeUnenhancedClasses" value="supported" />
-			<property name="openjpa.ConnectionFactoryProperties"
-				value="PrintParameters=true,PrettyPrintLineLength=80" />
-			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=True)" />
-			<property name="openjpa.jdbc.DBDictionary"
-				value="org.apache.openjpa.jdbc.sql.OracleDictionary" />
-			<!-- 查询结果一次转化为对象的最多个数，相当于 JDBC的结果集对象Statement.set FetchSize。默认为-1，表示所有的查询对象立即初始化；0表示使用 
-				JDBC驱动默认的数值。 -->
-			<property name="openjpa.FetchBatchSize" value="0" />
-			<!-- 启用缓存，并且设置缓存的容量为5000，并且禁用软引用容量 -->
-			<property name="openjpa.DataCache" value="true(CacheSize=5000, SoftReferenceSize=100)" />
-			<!-- 启用查询结果缓存，缓存的容量为1000，并且软引用的容量为100 -->
-			<property name="openjpa.QueryCache" value="true(CacheSize=5000, SoftReferenceSize=100)" />
-			<property name="openjpa.jdbc.Schema" value="water" />
-			<property name="openjpa.Log" value="SQL=TRACE" />
-			<!-- <property name="openjpa.Log" value="SQL=TRACE,File=/data/gsmpro/logs/authority_openjpa.log, 
-				DefaultLevel=WARN, Runtime=INFO, Tool=INFO"/> -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+			<property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver" />
+			<property name="hibernate.connection.username" value="water" />
+			<property name="hibernate.connection.password" value="water" />
+			<property name="hibernate.default_schema" value="water" />
+			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@127.0.0.1:1521:ORCLGBK" />
+			<property name="hibernate.max_fetch_depth" value="3" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<!-- validate | update | create | create-drop -->
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.jdbc.batch_size" value="30" />
+			<!--These statements are only executed if the schema is created ie if hibernate.hbm2ddl.auto is set to create or create-drop.  -->
+			<property name="hibernate.hbm2ddl.import_files" value="instanceSystem.sql" />
+			
 		</properties>
 	</persistence-unit>
 </persistence>

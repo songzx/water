@@ -13,6 +13,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<cxf.version>2.2.3</cxf.version>
+		<struts2.version>2.3.15.1</struts2.version>
+		<hibernate.version>3.0.5</hibernate.version>
+		<spring.version>3.2.3.RELEASE</spring.version>
 	</properties>
 
 	<modules>
@@ -38,11 +41,8 @@
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.openjpa</groupId>
-			<artifactId>openjpa</artifactId>
-			<version>2.2.0</version>
-		</dependency>
+		<!-- <dependency> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa</artifactId> 
+			<version>2.2.0</version> </dependency> -->
 		<dependency>
 			<groupId>ojdbc</groupId>
 			<artifactId>ojdbc</artifactId>
@@ -64,12 +64,11 @@
 			<version>1.7.2</version>
 		</dependency>
 		<dependency>
-			<groupId>hibernate</groupId>
-			<artifactId>hibernate</artifactId>
-			<version>3.0.5</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.2.0.Final</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.hibernate.javax.persistence</groupId> <artifactId>hibernate-jpa-2.0-api</artifactId> 
-			<version>1.0.1.Final</version> </dependency> -->
+
 		<dependency>
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>
@@ -142,16 +141,46 @@
 			<artifactId>cxf-api</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-spring-plugin</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<extensions>
-			<extension>
-				<groupId>org.apache.openjpa</groupId>
-				<artifactId>openjpa-all</artifactId>
-				<version>2.2.0</version>
-			</extension>
-		</extensions>
+		<!-- <extensions> <extension> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa-all</artifactId> 
+			<version>2.2.0</version> </extension> </extensions> -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -180,10 +209,13 @@
 					</additionalBuildcommands>
 				</configuration>
 			</plugin>
+			<!-- <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat6-maven-plugin</artifactId> 
+				<version>2.0</version> <configuration> <port>8087</port> <uriEncoding>UTF-8</uriEncoding> 
+				</configuration> </plugin> -->
+			<!-- 可调试（m2eclise+tomcat-maven-plugin插件） -->
 			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat6-maven-plugin</artifactId>
-				<version>2.0</version>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
 				<configuration>
 					<port>8087</port>
 					<uriEncoding>UTF-8</uriEncoding>

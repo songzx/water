@@ -28,22 +28,12 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Account getAccount(String logincode, String loginpasswd, EntityManager entityManager) {
-		/*Account account = entityManager.createQuery("select account from Person account where account.logincode = ?", Person.class).setParameter(1, logincode).getSingleResult();
-		if(account == null){
-			account = entityManager.createQuery("select account from Enterprise account where account.logincode = ?", Enterprise.class).setParameter(1, logincode).getSingleResult();
-		}
+		String encodepasswd = MD5Util.getInstance().compileWithSalt(loginpasswd, logincode);
 		
-		if(account != null){
-			if(account instanceof Person){
-				loginpasswd = MD5Util.getInstance().compileWithSalt(loginpasswd, ((Person)account).getIdcard());
-				account = entityManager.createQuery("select account from Person account where account.logincode = ? and account.loginpasswd = ?", Person.class).setParameter(1, logincode).setParameter(2, loginpasswd).getSingleResult();
-			}else if(account instanceof Enterprise){
-				loginpasswd = MD5Util.getInstance().compileWithSalt(loginpasswd, ((Enterprise)account).getOrganizationcode());
-				account = entityManager.createQuery("select account from Enterprise account where account.logincode = ? and account.loginpasswd = ?", Enterprise.class).setParameter(1, logincode).setParameter(2, loginpasswd).getSingleResult();
-			}
-		}
-		return account;*/
-		return null;
+		Account account = entityManager.createQuery("select account from Account account where account.logincode = :logincode and account.loginpasswd = :loginpasswd", Account.class).setParameter("logincode", logincode).setParameter("loginpasswd", encodepasswd).getSingleResult();
+		
+		
+		return account;
 	}
 
 	@Override

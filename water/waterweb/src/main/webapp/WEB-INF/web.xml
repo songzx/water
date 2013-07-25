@@ -11,7 +11,7 @@
 		<description>初始应用环境变量</description>
 		<listener-class>com.water.listener.WaterInitListener</listener-class>
 	</listener>
-	
+
 	<listener>
 		<description>在线用户session监听</description>
 		<listener-class>com.water.basictool.OnlineAccountListener</listener-class>
@@ -31,14 +31,23 @@
 		<servlet-name>logservlet</servlet-name>
 		<servlet-class>com.example.logexample.LogServlet</servlet-class>
 	</servlet>
-<servlet>
+
+	<servlet>
 		<servlet-name>accountservlet</servlet-name>
-		<servlet-class>com.ucap.web.servlet.AccountServlet</servlet-class>
+		<servlet-class>com.water.servlets.AccountServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>outinterfaceservlet</servlet-name>
 		<servlet-class>com.ucap.web.outInterface.cxf.OutInterfaceServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>categoryservlet</servlet-name>
+		<servlet-class>com.water.servlets.CategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>categoryservlet</servlet-name>
+		<url-pattern>/categoryservlet.servlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>outinterfaceservlet</servlet-name>

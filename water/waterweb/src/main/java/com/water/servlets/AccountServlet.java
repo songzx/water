@@ -3,7 +3,6 @@ package com.water.servlets;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,12 +22,14 @@ import org.slf4j.LoggerFactory;
 import com.water.basictool.OnlineAccount;
 import com.water.metamodel.account.Account;
 import com.water.metamodel.account.AccountLog;
+import com.water.metamodel.tree.Category;
 import com.water.services.AccountService;
 import com.water.services.AccountServiceImpl;
 
 
 public class AccountServlet extends HttpServlet {
 
+	
 	private EntityManager entityManager;
 	private static AccountService accountService;
 	private static EntityManagerFactory entityManagerFactory;
@@ -38,7 +39,7 @@ public class AccountServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		accountService = new AccountServiceImpl();
-		entityManagerFactory = Persistence.createEntityManagerFactory("com.ucap.datasource.web");
+		entityManagerFactory = Persistence.createEntityManagerFactory("authorityunit");
 	}
 
 	@Override
@@ -82,7 +83,7 @@ public class AccountServlet extends HttpServlet {
 
 	/**
 	 * 登陆
-	 * 
+	 * 登陆的业务逻辑（记录日志，操作日志，操作权限（菜单，按键权限),角色等)通过spring进行注入
 	 * @param request
 	 * @param response
 	 * @param entityManager
@@ -91,7 +92,11 @@ public class AccountServlet extends HttpServlet {
 	public void login(HttpServletRequest request, HttpServletResponse response, EntityManager entityManager) throws Exception {
 		Object obj = request.getSession().getAttribute("loginaccount");
 		if(obj != null){
-			request.getRequestDispatcher("/account/index.jsp").forward(request, response);
+			//获取用户的栏目权限
+			List<Category> categorys = entityManager.createQuery("select category from Category category where category.parentid = '0'", Category.class).getResultList();
+			request.setAttribute("categorys", categorys);
+			
+			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
 			return;
 		}
 		
@@ -99,6 +104,15 @@ public class AccountServlet extends HttpServlet {
 		String loginpasswd = request.getParameter("loginpasswd");
 
 		Account account = loginbusiness(logincode, loginpasswd, entityManager);
+		if(account == null){
+			request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+			return;
+		}
+		
+		//获取用户的栏目权限
+		List<Category> categorys = entityManager.createQuery("select category from Category category where category.parentid = '0'", Category.class).getResultList();
+		request.setAttribute("categorys", categorys);
+		
 		loginWebBusiness(request, response, account);
 	}
 
@@ -121,13 +135,17 @@ public class AccountServlet extends HttpServlet {
 			OnlineAccount.getInstance().addWebUser(new String[]{account.getId(),uuid,account.getUsername(),account.getLogincode(),System.currentTimeMillis()+""});
 		}
 		
-		request.getRequestDispatcher("/account/index.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
 	}
 
 	// 登陆业务逻辑
 	private Account loginbusiness(String logincode, String loginpasswd, EntityManager entityManager) {
 		// 业务逻辑，提到servlet里？？,还是新建一个业务逻辑层，而Account实体的基本操作推到下一层。？
 		Account account = accountService.getAccount(logincode, loginpasswd, entityManager);
+		if(account == null){
+			return null;
+		}
 		accountService.updateLogincount(account.getId(), entityManager);
 		accountService.updateLogindate(account.getId(), entityManager);
 
@@ -150,7 +168,7 @@ public class AccountServlet extends HttpServlet {
 		request.getSession().removeAttribute("loginaccount");
 		request.getSession().removeAttribute("currentwebUser");
 		request.getSession().invalidate();
-		request.getRequestDispatcher("/account/login.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
 	}
 
 	/**
@@ -164,7 +182,7 @@ public class AccountServlet extends HttpServlet {
 	public void regedit(HttpServletRequest request, HttpServletResponse response, EntityManager entityManager) throws Exception {
 		Object obj = request.getSession().getAttribute("loginaccount");
 		if(obj != null){
-			request.getRequestDispatcher("/account/index.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
 			return;
 		}
 		
@@ -219,7 +237,7 @@ public class AccountServlet extends HttpServlet {
 	public void list(HttpServletRequest request, HttpServletResponse response, EntityManager entityManager) throws Exception {
 		List<Account> accounts = accountService.getAccountList(entityManager);
 		request.setAttribute("accounts", accounts);
-		request.getRequestDispatcher("/account/manger.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/manger.jsp").forward(request, response);
 		return;
 	}
 }

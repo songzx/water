@@ -14,16 +14,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "AUTH_ACCOUNT_LOG")
 public class AccountLog {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO,generator="uuid-hex")
 	@Column(length = 50)
 	private String id;
-	private Date logindate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date logindate = new Date();
 	private Date logoutdate;
 	@Column(length = 15)
 	private String loginip;

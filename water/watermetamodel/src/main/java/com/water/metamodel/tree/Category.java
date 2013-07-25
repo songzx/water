@@ -11,7 +11,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-
 /**
  * 树，栏目
  * 
@@ -28,6 +27,10 @@ public class Category implements Serializable {
 	public static int CATEGORYSTATUS_DISABLED = 0;// 禁用
 	public static int CATEGORYSTATUS_ENABLE = 1;// 启用
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid-hex")
+	@Column(length = 50)
+	private String id;
 	@Column(nullable = false, unique = true, length = 50)
 	private String code;// 代码
 	@Column(length = 100)
@@ -43,7 +46,7 @@ public class Category implements Serializable {
 	private String url;
 
 	@Column(nullable = false, length = 50)
-	private String parentid;
+	private String parentid = "0";
 
 	public String getCode() {
 		return code;
@@ -71,6 +74,14 @@ public class Category implements Serializable {
 
 	public String getStatus() {
 		return status;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setStatus(String status) {
