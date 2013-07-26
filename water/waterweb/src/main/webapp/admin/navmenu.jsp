@@ -32,7 +32,6 @@ List<Category> categorys = request.getAttribute("categorys")==null?new ArrayList
 
 StringBuffer sb = new StringBuffer();
 
-System.out.println("aaaaaaaaaaaa");
 for(Category category : categorys){
 	//System.out.println("0".equals(tmpmap.get("PARENTID").toString())+"["+tmpmap.get("PARENTID").toString()+"]");
 	
@@ -42,7 +41,6 @@ for(Category category : categorys){
 		sb.append("</li>");
 	}
 }
-System.out.println("bbbbbbbbbbbbb");
 %>
 <div id="menu1" class="accordion" fillSpace="sidebar">
 		<div class="accordionHeader">

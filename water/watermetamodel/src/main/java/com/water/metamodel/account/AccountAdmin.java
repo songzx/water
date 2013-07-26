@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -20,9 +21,9 @@ public class AccountAdmin implements Serializable {
 	@Column(length = 50)
 	private String id;
 
-	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@PrimaryKeyJoinColumn
-	public Account account;
+	//@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@JoinColumn(columnDefinition="ID")
+	//public Account account;
 
 	@Column(length = 50)
 	private String email;// 邮件
@@ -61,14 +62,6 @@ public class AccountAdmin implements Serializable {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 
 }

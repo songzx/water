@@ -24,17 +24,10 @@ public class AccountWeb {
 	@Column(length = 20)
 	private String truename;
 
-	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@PrimaryKeyJoinColumn
-	public Account account;
+	//@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@PrimaryKeyJoinColumn(referencedColumnName="ID")
+	//public Account account;
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
 
 	public String getId() {
 		return id;
