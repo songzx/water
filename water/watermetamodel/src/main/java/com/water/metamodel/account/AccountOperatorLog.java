@@ -23,7 +23,7 @@ import javax.persistence.Table;
 public class AccountOperatorLog {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(length = 50)
 	private String id;
 	private String logdesc;
@@ -32,7 +32,6 @@ public class AccountOperatorLog {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accountlogid", nullable = false)
-	@Column(length = 50)
 	private AccountLog accountLog;
 
 	public String getId() {

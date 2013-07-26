@@ -17,12 +17,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "AUTH_ACCOUNT_LOG")
 public class AccountLog {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO,generator="uuid-hex")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(length = 50)
 	private String id;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -35,7 +37,6 @@ public class AccountLog {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accountid", nullable = false)
-	@Column(length=50)
 	private Account account;
 	private String accountname;// 便于性能
 

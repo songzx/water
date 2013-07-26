@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
+
 
 /**
  * 用户对象
@@ -42,7 +44,7 @@ public class Account implements Serializable {
 	private final static int ACCOUNT_STATUS_REMOVE = 3;// 删除
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO,generator="uuid-hex")
+	@GeneratedValue(strategy=GenerationType.AUTO)  
 	@Column(length = 50)
 	private String id ;
 	@Column(nullable = false, unique = true, length = 50)

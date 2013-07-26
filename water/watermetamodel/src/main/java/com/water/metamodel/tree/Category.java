@@ -11,6 +11,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * 树，栏目
  * 
@@ -28,7 +30,7 @@ public class Category implements Serializable {
 	public static int CATEGORYSTATUS_ENABLE = 1;// 启用
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid-hex")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(length = 50)
 	private String id;
 	@Column(nullable = false, unique = true, length = 50)
