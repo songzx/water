@@ -22,9 +22,6 @@ import javax.persistence.criteria.SetJoin;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 
-import org.apache.openjpa.persistence.criteria.ComparisonStyle;
-import org.apache.openjpa.persistence.criteria.CriteriaBuilderImpl;
-import org.apache.openjpa.persistence.meta.MetamodelImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -75,7 +72,7 @@ public class QueryTest {
 				account.setAccounttype(Account.ACCOUNT_TYPE_ADMIN);
 
 				accountAdmin.setEmail("360898142@qq.com");
-				accountAdmin.setAccount(account);
+				//accountAdmin.setAccount(account);
 
 				entityManager.persist(accountAdmin);
 				

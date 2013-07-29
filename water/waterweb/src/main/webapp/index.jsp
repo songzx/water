@@ -1,4 +1,3 @@
-<%@page import="com.water.authority.dao.UserDao"%>
 <%@page import="java.util.Properties"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
@@ -12,7 +11,6 @@
 <body>
 	<h1>Hello World!111111</h1>
 	<%
-	new UserDao().getUser();
 		Map<String,String> tmpmap = System.getenv();
 		for(Iterator<String> it = tmpmap.keySet().iterator(); it.hasNext();){
 			String tmpkey = it.next();

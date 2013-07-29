@@ -13,7 +13,7 @@ public class WaterSysteConfigConst {
 	public static final String WEBAPP_BASICDIR = "webapp.basicdir";
 	public static final String WEBAPP_LOG_BASICDIR = "webapp.log.basicdir";
 	public static final String WEBAPP_MODEL_BASICDIR = "webapp_model_basicdir";
-	public static final String WEBAPP_JAVA_IO_TMPDIR = "webapp.java.io.tmpdir";
+	public static final String WEBAPP_JAVA_IO_TMPDIR = "java.io.tmpdir";
 	public static final String WEBAPP_ENCODE = "webapp.encode";
 
 }
