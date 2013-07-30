@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<cxf.version>2.2.3</cxf.version>
-		<struts2.version>2.3.15.1</struts2.version>
+		<struts2.version>2.3.15</struts2.version>
 		<hibernate.version>3.0.5</hibernate.version>
 		<spring.version>3.2.3.RELEASE</spring.version>
 	</properties>
@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
+			<version>2.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -67,6 +67,12 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.2.0.Final</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>javassist</artifactId>
+					<groupId>org.javassist</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -84,6 +90,12 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>3.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>asm</artifactId>
+					<groupId>org.ow2.asm</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.disruptor</groupId>
@@ -136,6 +148,12 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-web</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -146,22 +164,28 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-api</artifactId>
 			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-core</artifactId>
-			<version>${struts2.version}</version>
 			<exclusions>
 				<exclusion>
-					<artifactId>asm</artifactId>
-					<groupId>asm</groupId>
+					<artifactId>geronimo-annotation_1.0_spec</artifactId>
+					<groupId>org.apache.geronimo.specs</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
 			<version>${struts2.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-web</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -191,6 +215,31 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>

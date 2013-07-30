@@ -2,10 +2,11 @@
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<display-name>gtdweb</display-name>
+	<display-name>water</display-name>
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml,classpath:spring/applicationContext-*.xml</param-value>
@@ -34,14 +35,6 @@
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-		<init-param>
-			<param-name>struts.devMode</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>struts.i18n.encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
 	</filter>
 
 	<filter-mapping>
@@ -54,45 +47,6 @@
 		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
 
-	<servlet>
-		<servlet-name>logservlet</servlet-name>
-		<servlet-class>com.example.logexample.LogServlet</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>accountservlet</servlet-name>
-		<servlet-class>com.water.servlets.AccountServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>outinterfaceservlet</servlet-name>
-		<servlet-class>com.ucap.web.outInterface.cxf.OutInterfaceServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>categoryservlet</servlet-name>
-		<servlet-class>com.water.servlets.CategoryServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>categoryservlet</servlet-name>
-		<url-pattern>/categoryservlet.servlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>outinterfaceservlet</servlet-name>
-		<url-pattern>/outinterfaceservlet/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>accountservlet</servlet-name>
-		<url-pattern>/accountservlet.servlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>logservlet</servlet-name>
-		<url-pattern>/logservlet.servlet</url-pattern>
-	</servlet-mapping>
-
-	<icon>
-		<small-icon>small.gif</small-icon>
-		<large-icon>large.gif</large-icon>
-	</icon>
 	<error-page>
 		<error-code>404</error-code>
 		<location>/error/404.jsp</location>

@@ -60,6 +60,7 @@ public class QueryTest {
 
 	@Test
 	public void testQuery1() {
+		/*
 		try {
 			
 			for (int i = 0; i < 5; i++) {
@@ -91,11 +92,12 @@ public class QueryTest {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	@Test
 	public void testQuery2() {
+		/*
 		try {
 			
 			String strs[] = new String[25];
@@ -141,6 +143,6 @@ public class QueryTest {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
