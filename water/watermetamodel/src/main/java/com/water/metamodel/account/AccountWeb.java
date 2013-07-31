@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -24,9 +26,10 @@ public class AccountWeb {
 	@Column(length = 20)
 	private String truename;
 
-	//@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	//@PrimaryKeyJoinColumn(referencedColumnName="ID")
-	//public Account account;
+	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@MapsId
+	@JoinColumn(name="id")
+	public Account account;
 
 
 	public String getId() {
@@ -68,4 +71,13 @@ public class AccountWeb {
 	public void setTruename(String truename) {
 		this.truename = truename;
 	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
 }

@@ -73,16 +73,17 @@ public class Account implements Serializable {
 	private String updater;
 	private Date updatedate;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,optional=false)
+	/*@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name="id")
 	private AccountAdmin accountAdmin;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,optional=false)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name="id")
-	public AccountWeb accountWeb;
+	public AccountWeb accountWeb;*/
 
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private Set<AccountLog> accountLogs = new HashSet<AccountLog>();;
 
@@ -90,6 +91,7 @@ public class Account implements Serializable {
 		return username;
 	}
 
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -118,13 +120,6 @@ public class Account implements Serializable {
 		this.logincount = logincount;
 	}
 
-	public AccountWeb getAccountWeb() {
-		return accountWeb;
-	}
-
-	public void setAccountWeb(AccountWeb accountWeb) {
-		this.accountWeb = accountWeb;
-	}
 
 	public Set<AccountLog> getAccountLogs() {
 		return accountLogs;
@@ -214,12 +209,5 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
-	public AccountAdmin getAccountAdmin() {
-		return accountAdmin;
-	}
-
-	public void setAccountAdmin(AccountAdmin accountAdmin) {
-		this.accountAdmin = accountAdmin;
-	}
 
 }

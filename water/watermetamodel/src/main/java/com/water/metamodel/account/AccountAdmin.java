@@ -21,9 +21,10 @@ public class AccountAdmin implements Serializable {
 	@Column(length = 50)
 	private String id;
 
-	//@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	//@JoinColumn(columnDefinition="ID")
-	//public Account account;
+	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@MapsId
+	@JoinColumn(name="id")
+	public Account account;
 
 	@Column(length = 50)
 	private String email;// 邮件
@@ -62,6 +63,14 @@ public class AccountAdmin implements Serializable {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 }
