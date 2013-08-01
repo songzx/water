@@ -6,12 +6,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "AUTH_ACCOUNT_ADMIN")
@@ -21,9 +24,11 @@ public class AccountAdmin implements Serializable {
 	@Column(length = 50)
 	private String id;
 
-	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@MapsId
-	@JoinColumn(name="id")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@MapsId("id")
+	//@JoinColumn(name="id")
+	//@OneToOne(targetEntity=Account.class, cascade={CascadeType.ALL}, mappedBy="accountAdmin")  
+    @PrimaryKeyJoinColumn(name="id", referencedColumnName="id")  
 	public Account account;
 
 	@Column(length = 50)

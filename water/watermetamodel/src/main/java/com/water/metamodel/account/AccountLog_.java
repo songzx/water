@@ -10,8 +10,8 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(AccountLog.class)
 public abstract class AccountLog_ {
 
-	public static volatile SetAttribute<AccountLog, AccountOperatorLog> accountOperatorLogs;
 	public static volatile SingularAttribute<AccountLog, String> id;
+	public static volatile SetAttribute<AccountLog, AccountOperatorLog> accountOperatorLogs;
 	public static volatile SingularAttribute<AccountLog, String> accountname;
 	public static volatile SingularAttribute<AccountLog, Date> logindate;
 	public static volatile SingularAttribute<AccountLog, Date> logoutdate;

@@ -10,6 +10,7 @@ public abstract class AccountAdmin_ {
 
 	public static volatile SingularAttribute<AccountAdmin, String> id;
 	public static volatile SingularAttribute<AccountAdmin, String> email;
+	public static volatile SingularAttribute<AccountAdmin, Account> account;
 	public static volatile SingularAttribute<AccountAdmin, String> telephone;
 	public static volatile SingularAttribute<AccountAdmin, String> mobile;
 

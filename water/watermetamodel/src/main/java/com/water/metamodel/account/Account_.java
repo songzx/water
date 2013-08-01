@@ -23,8 +23,8 @@ public abstract class Account_ {
 	public static volatile SingularAttribute<Account, String> username;
 	public static volatile SingularAttribute<Account, String> aliasname;
 	public static volatile SingularAttribute<Account, String> logincode;
-	public static volatile SingularAttribute<Account, Integer> accounttype;
 	public static volatile SingularAttribute<Account, String> accountfrom;
+	public static volatile SingularAttribute<Account, Integer> accounttype;
 	public static volatile SingularAttribute<Account, Date> updatedate;
 	public static volatile SingularAttribute<Account, Long> logincount;
 

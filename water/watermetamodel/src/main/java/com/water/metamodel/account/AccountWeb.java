@@ -26,9 +26,11 @@ public class AccountWeb {
 	@Column(length = 20)
 	private String truename;
 
-	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@MapsId
-	@JoinColumn(name="id")
+	//@JoinColumn(name="id")
+	//@OneToOne(targetEntity=Account.class, cascade={CascadeType.ALL}, mappedBy="accountAdmin")  
+    @PrimaryKeyJoinColumn(name="id", referencedColumnName="id") 
 	public Account account;
 
 
@@ -70,14 +72,6 @@ public class AccountWeb {
 
 	public void setTruename(String truename) {
 		this.truename = truename;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 	
 }

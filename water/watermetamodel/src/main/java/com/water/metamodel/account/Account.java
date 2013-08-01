@@ -16,12 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
-
 
 /**
  * 用户对象
@@ -34,6 +36,10 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "AUTH_ACCOUNT")
+/*@SecondaryTables({
+	@SecondaryTable(name="AUTH_ACCOUNT_ADMIN",pkJoinColumns=@PrimaryKeyJoinColumn(name="id",referencedColumnName="id")),
+	@SecondaryTable(name="AUTH_ACCOUNT_WEB",pkJoinColumns=@PrimaryKeyJoinColumn(referencedColumnName="id",name="id"))
+})*/
 public class Account implements Serializable {
 	public static final int ACCOUNT_TYPE_ADMIN = 0;
 	public static final int ACCOUNT_TYPE_WEB_PERSON = 1;
@@ -45,9 +51,9 @@ public class Account implements Serializable {
 	private final static int ACCOUNT_STATUS_REMOVE = 3;// 删除
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)  
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length = 50)
-	private String id ;
+	private String id;
 	@Column(nullable = false, unique = true, length = 50)
 	private String logincode;// 帐号
 	@Column(length = 50)
@@ -63,7 +69,7 @@ public class Account implements Serializable {
 	@Column(nullable = false)
 	private int accountstatus = 1;// 帐号状态
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastlogindate= new Date();
+	private Date lastlogindate = new Date();
 	private String accountfrom = "water";// 默认注册来源“water”
 
 	private String creater;
@@ -73,17 +79,18 @@ public class Account implements Serializable {
 	private String updater;
 	private Date updatedate;
 
-	/*@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@MapsId
-	@JoinColumn(name="id")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	//@MapsId
+	//@JoinColumn(name="id")
+	@PrimaryKeyJoinColumn
 	private AccountAdmin accountAdmin;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@MapsId
-	@JoinColumn(name="id")
-	public AccountWeb accountWeb;*/
+	//@MapsId
+	//@JoinColumn(name="id")
+	@PrimaryKeyJoinColumn
+	public AccountWeb accountWeb;
 
-	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private Set<AccountLog> accountLogs = new HashSet<AccountLog>();;
 
@@ -91,7 +98,6 @@ public class Account implements Serializable {
 		return username;
 	}
 
-	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -119,7 +125,6 @@ public class Account implements Serializable {
 	public void setLogincount(long logincount) {
 		this.logincount = logincount;
 	}
-
 
 	public Set<AccountLog> getAccountLogs() {
 		return accountLogs;
@@ -209,5 +214,20 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
+	public AccountAdmin getAccountAdmin() {
+		return accountAdmin;
+	}
+
+	public void setAccountAdmin(AccountAdmin accountAdmin) {
+		this.accountAdmin = accountAdmin;
+	}
+
+	public AccountWeb getAccountWeb() {
+		return accountWeb;
+	}
+
+	public void setAccountWeb(AccountWeb accountWeb) {
+		this.accountWeb = accountWeb;
+	}
 
 }

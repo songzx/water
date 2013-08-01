@@ -11,6 +11,7 @@ public abstract class AccountWeb_ {
 	public static volatile SingularAttribute<AccountWeb, String> id;
 	public static volatile SingularAttribute<AccountWeb, String> truename;
 	public static volatile SingularAttribute<AccountWeb, String> email;
+	public static volatile SingularAttribute<AccountWeb, Account> account;
 	public static volatile SingularAttribute<AccountWeb, String> telephone;
 	public static volatile SingularAttribute<AccountWeb, String> mobile;
 
