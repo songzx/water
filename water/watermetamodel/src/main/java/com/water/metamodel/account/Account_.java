@@ -1,8 +1,9 @@
 package com.water.metamodel.account;
 
+import com.water.metamodel.tree.Category;
 import java.util.Date;
 import javax.annotation.Generated;
-import javax.persistence.metamodel.SetAttribute;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -16,7 +17,7 @@ public abstract class Account_ {
 	public static volatile SingularAttribute<Account, Date> createdate;
 	public static volatile SingularAttribute<Account, String> creater;
 	public static volatile SingularAttribute<Account, Integer> accountstatus;
-	public static volatile SetAttribute<Account, AccountLog> accountLogs;
+	public static volatile ListAttribute<Account, AccountLog> accountLogs;
 	public static volatile SingularAttribute<Account, AccountAdmin> accountAdmin;
 	public static volatile SingularAttribute<Account, String> id;
 	public static volatile SingularAttribute<Account, String> loginpasswd;
@@ -25,6 +26,7 @@ public abstract class Account_ {
 	public static volatile SingularAttribute<Account, String> logincode;
 	public static volatile SingularAttribute<Account, String> accountfrom;
 	public static volatile SingularAttribute<Account, Integer> accounttype;
+	public static volatile ListAttribute<Account, Category> categories;
 	public static volatile SingularAttribute<Account, Date> updatedate;
 	public static volatile SingularAttribute<Account, Long> logincount;
 

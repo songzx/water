@@ -27,7 +27,7 @@ public class AccountWeb {
 	private String truename;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@MapsId
+	@MapsId("id")
 	//@JoinColumn(name="id")
 	//@OneToOne(targetEntity=Account.class, cascade={CascadeType.ALL}, mappedBy="accountAdmin")  
     @PrimaryKeyJoinColumn(name="id", referencedColumnName="id") 

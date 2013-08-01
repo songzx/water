@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,83 +21,78 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.tools.internal.ws.processor.model.Request;
 import com.water.basictool.OnlineAccount;
 import com.water.metamodel.account.Account;
 import com.water.metamodel.account.AccountLog;
 import com.water.metamodel.tree.Category;
 import com.water.services.AccountService;
+import com.water.services.IAccountService;
 
-
+@Component("accountAction")
+@Scope("prototype")
 public class AccountAction extends ActionSupport {
 
 	private static Logger logger = LoggerFactory.getLogger(AccountAction.class);
+	@Resource
+	private IAccountService accountService;
+	private Account account;
 
-
-	/**
-	 * 登陆
-	 * 登陆的业务逻辑（记录日志，操作日志，操作权限（菜单，按键权限),角色等)通过spring进行注入
-	 * @param request
-	 * @param response
-	 * @param entityManager
-	 * @throws Exception
-	 */
-	public void login(HttpServletRequest request, HttpServletResponse response, EntityManager entityManager) throws Exception {
-		Object obj = request.getSession().getAttribute("loginaccount");
-		if(obj != null){
-			//获取用户的栏目权限
-			List<Category> categorys = entityManager.createQuery("select category from Category category where category.parentid = '0'", Category.class).getResultList();
-			request.setAttribute("categorys", categorys);
-			
-			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
-			return;
+	public String login() {
+		//String logincode = ServletActionContext.getRequest().getParameter("logincode");
+		//String loginpasswd = ServletActionContext.getRequest().getParameter("loginpasswd");
+		
+		Object obj = ServletActionContext.getRequest().getSession().getAttribute("loginaccount");
+		//entityManager.createQuery("select category from Category category where category.parentid = '0'", Category.class).getResultList()
+		if (obj != null) {
+			// 获取用户的栏目权限
+			String accountid = ServletActionContext.getRequest().getSession().getAttribute("accountid").toString();
+			List<Category> categories = this.getAccountService().getCategories(accountid,"0");
+			ServletActionContext.getRequest().setAttribute("categories", categories);
+			return SUCCESS;
 		}
 		
-		String logincode = request.getParameter("logincode");
-		String loginpasswd = request.getParameter("loginpasswd");
-
-		Account account = loginbusiness(logincode, loginpasswd, entityManager);
-		if(account == null){
-			request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
-			return;
+		Account taccount = this.getAccountService().getAccount(account.getLogincode(), account.getLoginpasswd());
+		if (taccount == null) {
+			return "login";
 		}
+		List<Category> categories = this.getAccountService().getCategories(taccount.getId(),"0");
+		ServletActionContext.getRequest().setAttribute("categories", categories);
 		
-		//获取用户的栏目权限
-		List<Category> categorys = entityManager.createQuery("select category from Category category where category.parentid = '0'", Category.class).getResultList();
-		request.setAttribute("categorys", categorys);
-		
-		loginWebBusiness(request, response, account);
+		loginWebBusiness(taccount);
+		return SUCCESS;
 	}
 
 	// 登陆之后，前台的业务处理
-	private void loginWebBusiness(HttpServletRequest request, HttpServletResponse response, Account account) throws ServletException, IOException {
+	private void loginWebBusiness(Account account) {
 		Map<String, String> loginaccount = new HashMap<String, String>();
 		loginaccount.put("id", account.getId());
 		loginaccount.put("logincode", account.getLogincode());
 		loginaccount.put("username", account.getUsername());
 		loginaccount.put("logincount", account.getLogincount() + "");
 		loginaccount.put("lastlogindate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(account.getLastlogindate()));
-		//loginaccount.put("regedittype", account.getRegedittype());
-		//loginaccount.put("accountlevel", account.getAccountlevel().getName());
-		request.getSession().setAttribute("loginaccount", loginaccount);
-
-		//添加在线人数
-		if(request.getSession().getAttribute("loginaccount") != null && null == request.getSession().getAttribute("currentwebUser")){
+		// loginaccount.put("regedittype", account.getRegedittype());
+		// loginaccount.put("accountlevel",
+		// account.getAccountlevel().getName());
+		ServletActionContext.getRequest().getSession().setAttribute("loginaccount", loginaccount);
+		ServletActionContext.getRequest().getSession().setAttribute("accountid",account.getId());
+		
+		// 添加在线人数
+		if (ServletActionContext.getRequest().getSession().getAttribute("loginaccount") != null && null == ServletActionContext.getRequest().getSession().getAttribute("currentwebUser")) {
 			String uuid = UUID.randomUUID().toString().replace("-", "");
-			request.getSession().setAttribute("currentwebUser", uuid);
-			OnlineAccount.getInstance().addWebUser(new String[]{account.getId(),uuid,account.getUsername(),account.getLogincode(),System.currentTimeMillis()+""});
+			ServletActionContext.getRequest().getSession().setAttribute("currentwebUser", uuid);
+			OnlineAccount.getInstance().addWebUser(new String[] { account.getId(), uuid, account.getUsername(), account.getLogincode(), System.currentTimeMillis() + "" });
 		}
-		
-		
-		request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
 	}
+	
 
-	// 登陆业务逻辑
-	private Account loginbusiness(String logincode, String loginpasswd, EntityManager entityManager) {
-		return null;
-	}
 
 	/**
 	 * 退出
@@ -122,11 +118,11 @@ public class AccountAction extends ActionSupport {
 	 */
 	public void regedit(HttpServletRequest request, HttpServletResponse response, EntityManager entityManager) throws Exception {
 		Object obj = request.getSession().getAttribute("loginaccount");
-		if(obj != null){
+		if (obj != null) {
 			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
 			return;
 		}
-		
+
 		String logincode = request.getParameter("logincode");
 		String loginpasswd = request.getParameter("loginpasswd");
 		String username = request.getParameter("username");
@@ -134,48 +130,46 @@ public class AccountAction extends ActionSupport {
 		String regedittype = request.getParameter("regedittype");
 
 		// 组装实体类
-		/*Account account = null;
-		Person person = null;
-		if (Account.ACCOUNT_REGEDITTYPE_PERSON.equalsIgnoreCase(regedittype)) {
-			person = new Person();
-			person.setIdcard(idcard);
-			
-			person.setLogincode(logincode);
-			person.setCreatedate(new Date());
-			person.setLastlogindate(new Date());
-			person.setUsername(username);
-			person.setLogincount(1);
-			person.setLoginpasswd(loginpasswd);
-			person.setRegedittype(regedittype);
-			person.setStatus(Account.ACCOUNT_STATUS_ENABLE);
-			person.setUpdatedate(new Date());
-			account = person;
-		} else if (Account.ACCOUNT_REGEDITTYPE_ENTERPRISE.equalsIgnoreCase(regedittype)) {
-			// account.setEnterprise(enterprise);
-		} else {
-			logger.error("注册类型非法：" + regedittype);
-			request.getRequestDispatcher("/error/500.jsp").forward(request, response);
-			return;
-		}
-		//AccountLevel accountLevel = new AccountLevel();
-		//accountLevel.setName("一级用户");
-		//account.setAccountlevel(accountLevel);
-		
-		person = (Person)accountService.createAccount(person, entityManager);
-		if (account != null) {
-			loginWebBusiness(request, response, account);
-		}*/
+		/*
+		 * Account account = null; Person person = null; if
+		 * (Account.ACCOUNT_REGEDITTYPE_PERSON.equalsIgnoreCase(regedittype)) {
+		 * person = new Person(); person.setIdcard(idcard);
+		 * 
+		 * person.setLogincode(logincode); person.setCreatedate(new Date());
+		 * person.setLastlogindate(new Date()); person.setUsername(username);
+		 * person.setLogincount(1); person.setLoginpasswd(loginpasswd);
+		 * person.setRegedittype(regedittype);
+		 * person.setStatus(Account.ACCOUNT_STATUS_ENABLE);
+		 * person.setUpdatedate(new Date()); account = person; } else if
+		 * (Account
+		 * .ACCOUNT_REGEDITTYPE_ENTERPRISE.equalsIgnoreCase(regedittype)) { //
+		 * account.setEnterprise(enterprise); } else { logger.error("注册类型非法：" +
+		 * regedittype);
+		 * request.getRequestDispatcher("/error/500.jsp").forward(request,
+		 * response); return; } //AccountLevel accountLevel = new
+		 * AccountLevel(); //accountLevel.setName("一级用户");
+		 * //account.setAccountlevel(accountLevel);
+		 * 
+		 * person = (Person)accountService.createAccount(person, entityManager);
+		 * if (account != null) { loginWebBusiness(request, response, account);
+		 * }
+		 */
 	}
-	
-	/**
-	 * 登陆
-	 * 
-	 * @param request
-	 * @param response
-	 * @param entityManager
-	 * @throws Exception
-	 */
-	public void list(HttpServletRequest request, HttpServletResponse response, EntityManager entityManager) throws Exception {
-		return;
+
+
+	public IAccountService getAccountService() {
+		return accountService;
+	}
+
+	public void setAccountService(IAccountService accountService) {
+		this.accountService = accountService;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 }

@@ -9,7 +9,7 @@
 	System.out.println(OnlineAccount.getInstance().getWebUsersMap().toString());
 	String[] onlines = OnlineAccount.getInstance().getWebUsersMap().get(loginaccount.get("id"));
 	
-	List<Category> categorys = request.getAttribute("categorys")==null?new ArrayList<Category>():(List<Category>)request.getAttribute("categorys");
+	List<Category> categorys = request.getAttribute("categories")==null?new ArrayList<Category>():(List<Category>)request.getAttribute("categories");
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -102,10 +102,10 @@ $(function(){
 		}
 	});
 	//初始化菜单
-	$.post(encodeURI($('#navMenu').find('li').eq(0).find('a').eq(0).attr("href")),{},function(html){
-		$("#sidebar").find(".accordion").remove().end().append(html);
-		$('#navMenu').find('li').eq(0).addClass("selected");
-	});
+	///$.post(encodeURI($('#navMenu').find('li').eq(0).find('a').eq(0).attr("href")),{},function(html){
+		//$("#sidebar").find(".accordion").remove().end().append(html);
+		//$('#navMenu').find('li').eq(0).addClass("selected");
+	//});
 		
 });
 
@@ -120,7 +120,7 @@ $(function(){
 				<ul class="nav">
 					<li><a href="javascript:">欢迎你，admin</a></li>
 					<li><a href="changepwd.html" target="dialog" width="600">设置</a></li>
-					<li><a href="/waterweb/accountservlet.servlet?method=loginout">退出</a></li>
+					<li><a href="/waterweb/account/loginout">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
 					<li theme="default"><div class="selected">蓝色</div></li>
@@ -137,7 +137,7 @@ $(function(){
 					<%
 					for(Category category : categorys){
 					%>
-					<li><a href="/waterweb/categoryservlet.servlet?method=cagetorylistbyaccount&menuid=<%=category.getId() %>&menuname=<%=category.getName() %>"><span><%=category.getName() %></span></a></li>
+					<li><a href="/waterweb/category/cagetorylistbyaccount?categoryid=<%=category.getId() %>&categoryname=<%=category.getName() %>"><span><%=category.getName() %></span></a></li>
 					<%} %>
 				</ul>
 			</div>

@@ -5,7 +5,7 @@
 
 <struts>
 	<package name="account" namespace="/account" extends="basicstruts2">
-		<action name="*" class="accountaction" method="{1}">
+		<action name="*" class="accountAction" method="{1}">
 			<result name="success">/admin/index.jsp</result>
 			<result name="login">/admin/login.jsp</result>
 			<result name="loginout">/admin/login.jsp</result>
