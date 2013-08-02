@@ -1,0 +1,7 @@
+
+ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+FooService fooService = ctx.getBean(FooService.class);
+
+WebApplicationContext appContext = WebApplicationContextUtils.getApplicationContext(
+    getRequestCycle().getRequestContext().getServlet().getServletContext());
+UserService userService = (UserService) appContext.getBean("userService");
