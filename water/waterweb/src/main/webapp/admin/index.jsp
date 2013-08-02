@@ -102,10 +102,10 @@ $(function(){
 		}
 	});
 	//初始化菜单
-	///$.post(encodeURI($('#navMenu').find('li').eq(0).find('a').eq(0).attr("href")),{},function(html){
-		//$("#sidebar").find(".accordion").remove().end().append(html);
-		//$('#navMenu').find('li').eq(0).addClass("selected");
-	//});
+	$.post(encodeURI($('#navMenu').find('li').eq(0).find('a').eq(0).attr("href")),{},function(html){
+		$("#sidebar").find(".accordion").remove().end().append(html);
+		$('#navMenu').find('li').eq(0).addClass("selected");
+	});
 		
 });
 

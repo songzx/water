@@ -29,12 +29,30 @@ public class CategoryAction extends ActionSupport {
 	 */
 	public String cagetorylistbyaccount() throws Exception {
 		Object accountid = ServletActionContext.getRequest().getSession().getAttribute("accountid");
-		String parentid = (String)ServletActionContext.getRequest().getParameter("parentid");
-		if(accountid == null ){
+		String parentid = (String) ServletActionContext.getRequest().getParameter("parentid");
+		if (accountid == null) {
 			return "nologin";
 		}
-		
-		List<Category> categorys = categoryService.cagetorylistbyaccount(accountid.toString(),parentid);
+
+		List<Category> categorys = categoryService.cagetorylistbyaccount(accountid.toString(), parentid);
+		ServletActionContext.getRequest().setAttribute("categorys", categorys);
+		return SUCCESS;
+	}
+
+	/**
+	 * 分页查询
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String searchcategorytopage() throws Exception {
+		Object accountid = ServletActionContext.getRequest().getSession().getAttribute("accountid");
+		String parentid = (String) ServletActionContext.getRequest().getParameter("parentid");
+		if (accountid == null) {
+			return "nologin";
+		}
+
+		List<Category> categorys = categoryService.cagetorylistbyaccount(accountid.toString(), parentid);
 		ServletActionContext.getRequest().setAttribute("categorys", categorys);
 		return SUCCESS;
 	}
