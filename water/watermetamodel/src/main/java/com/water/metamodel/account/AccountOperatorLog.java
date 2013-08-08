@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * 操作日志，使用队列的形式进行；
  * 步骤:登陆系统后，有登陆日志ID，在帐号session有效期内把用户操作日志交给队列进行入库。退出后去掉日志ID，并记录退出日志
@@ -23,7 +25,8 @@ import javax.persistence.Table;
 public class AccountOperatorLog {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO,generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	@Column(length = 50)
 	private String id;
 	private String logdesc;

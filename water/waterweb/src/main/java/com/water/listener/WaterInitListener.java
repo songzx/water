@@ -43,6 +43,8 @@ public class WaterInitListener implements ServletContextListener {
 		String realpath = WaterInitListener.class.getResource("/").getPath();
 		String basicconfig = realpath + "commonconfig/sysconfigpath.properties";
 		
+		String contextpath = servletcontextevent.getServletContext().getRealPath("/");
+		
 		Properties properties = new Properties();
 		try {
 			properties.load(new FileInputStream(basicconfig));
@@ -53,7 +55,7 @@ public class WaterInitListener implements ServletContextListener {
 			String encode = properties.getProperty(WaterSysteConfigConst.WEBAPP_ENCODE);
 
 			System.setProperty(WaterSysteConfigConst.SERVER_BASICDIR, serverdir);
-			System.setProperty(WaterSysteConfigConst.WEBAPP_BASICDIR, servletcontextevent.getServletContext().getRealPath("/"));
+			System.setProperty(WaterSysteConfigConst.WEBAPP_BASICDIR, contextpath);
 			System.setProperty(WaterSysteConfigConst.WEBAPP_LOG_BASICDIR, logdir);
 			System.setProperty(WaterSysteConfigConst.WEBAPP_JAVA_IO_TMPDIR, tmpdir);
 			System.setProperty(WaterSysteConfigConst.WEBAPP_ENCODE, encode);
@@ -77,8 +79,9 @@ public class WaterInitListener implements ServletContextListener {
 			logger = LoggerFactory.getLogger(WaterInitListener.class);
 			for(Iterator<Object> it = properties.keySet().iterator();it.hasNext();){
 				String key = (String) it.next();
-				System.setProperty(key, properties.getProperty(key).trim().replaceFirst("classpath:", realpath));
-				logger.info(key+" : "+ properties.getProperty(key).trim().replaceFirst("classpath:", realpath));
+				System.setProperty(key, properties.getProperty(key).trim().replaceFirst("classpath:", realpath).replaceFirst("contextpath:", contextpath));
+				
+				logger.info(key+" : "+ properties.getProperty(key).trim().replaceFirst("classpath:", realpath).replaceFirst("contextpath:", contextpath));
 			}
 			logger.info("应用配置监听正在启动....");
 			logger.info("－－－－－－－－－－－－－－－－应用基本配置－－－－－－－－－－－－－－－－－－－－－－－－");

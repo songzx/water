@@ -14,7 +14,7 @@ import com.water.services.ICategoryService;
 
 @Component("categoryAction")
 @Scope("prototype")
-public class CategoryAction extends ActionSupport {
+public class CategoryAction extends ParentAction {
 	private Category category;
 	@Resource
 	private ICategoryService categoryService;
@@ -38,6 +38,8 @@ public class CategoryAction extends ActionSupport {
 		ServletActionContext.getRequest().setAttribute("categorys", categorys);
 		return SUCCESS;
 	}
+
+	
 
 	/**
 	 * 分页查询

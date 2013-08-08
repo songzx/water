@@ -8,9 +8,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.water.actions.PageBean;
 import com.water.daos.AccountDao;
 import com.water.daos.CategoryDao;
 import com.water.metamodel.account.Account;
+import com.water.metamodel.account.AccountAdmin;
 import com.water.metamodel.account.AccountLog;
 import com.water.metamodel.tree.Category;
 
@@ -89,6 +91,32 @@ public class AccountService implements IAccountService {
 
 	public void setCategoryDao(CategoryDao categoryDao) {
 		this.categoryDao = categoryDao;
+	}
+
+	@Override
+	public PageBean list(PageBean pageBean) {
+		return this.getAccountDao().list(pageBean);
+	}
+
+	@Override
+	public boolean add(Account account) {
+		return this.getAccountDao().add(account);
+	}
+
+	@Override
+	public AccountAdmin get(String id, Class<AccountAdmin> clazz) {
+		return this.getAccountDao().get(id,clazz);
+	}
+
+	
+	@Override
+	public boolean modify(AccountAdmin accountAdmin) {
+		return this.getAccountDao().modify(accountAdmin);
+	}
+
+	@Override
+	public boolean remove(String id) {
+		return this.getAccountDao().remove(id);
 	}
 
 }

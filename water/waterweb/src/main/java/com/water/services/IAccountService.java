@@ -5,7 +5,9 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
+import com.water.actions.PageBean;
 import com.water.metamodel.account.Account;
+import com.water.metamodel.account.AccountAdmin;
 import com.water.metamodel.account.AccountLog;
 import com.water.metamodel.tree.Category;
 
@@ -48,4 +50,14 @@ public interface IAccountService {
 	 * @return
 	 */
 	List<Category> getCategories(String accountid,String parentid);
+
+	PageBean list(PageBean pageBean);
+
+	boolean add(Account account);
+
+	AccountAdmin get(String id, Class<AccountAdmin> clazz);
+
+	boolean modify(AccountAdmin accountAdmin);
+
+	boolean remove(String id);
 }

@@ -25,14 +25,15 @@
 		<property name="entityManagerFactory" ref="myEmf" />
 	</bean>
 
-
-
 	<tx:advice id="txAdvice" transaction-manager="myTxManager">
 		<tx:attributes>
 			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
 			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="*modify*" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
 

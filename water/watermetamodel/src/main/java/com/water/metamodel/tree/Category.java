@@ -30,7 +30,8 @@ public class Category implements Serializable {
 	public static int CATEGORYSTATUS_ENABLE = 1;// 启用
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO,generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	@Column(length = 50)
 	private String id;
 	@Column(nullable = false, unique = true, length = 50)

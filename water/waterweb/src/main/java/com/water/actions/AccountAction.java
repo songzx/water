@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
+import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,9 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.water.basictool.OnlineAccount;
+import com.water.basictool.ValidateUtil;
 import com.water.metamodel.account.Account;
+import com.water.metamodel.account.AccountAdmin;
 import com.water.metamodel.account.AccountLog;
 import com.water.metamodel.tree.Category;
 import com.water.services.AccountService;
@@ -91,8 +95,6 @@ public class AccountAction extends ActionSupport {
 		}
 	}
 	
-
-
 	/**
 	 * 退出
 	 * 
@@ -107,6 +109,64 @@ public class AccountAction extends ActionSupport {
 		return "loginout";
 	}
 
+	
+	public String list() throws Exception {
+		PageBean pageBean = new PageBean();
+		pageBean.setPageSize(ValidateUtil.getInstance().checkInt(ServletActionContext.getRequest().getParameter("pageSize"), 2, 100));
+		pageBean.setCurPage(ValidateUtil.getInstance().checkInt(ServletActionContext.getRequest().getParameter("curPage"), 1));
+		
+		pageBean.getParams().put("keyword", ServletActionContext.getRequest().getParameter("keyword")==null?"":ServletActionContext.getRequest().getParameter("keyword"));
+		this.getAccountService().list(pageBean);
+		ServletActionContext.getRequest().setAttribute("pageBean", pageBean);
+		return "list";
+	}
+
+	public String add() throws Exception {
+		AccountAdmin accountAdmin = new AccountAdmin();
+		//BeanUtils.populate(account, ServletActionContext.getRequest().getParameterMap());
+		accountAdmin.setLogincode(ServletActionContext.getRequest().getParameter("logincode"));
+		accountAdmin.setLoginpasswd(ServletActionContext.getRequest().getParameter("loginpasswd"));
+		
+		accountAdmin.setEmail(ServletActionContext.getRequest().getParameter("email"));
+		
+		boolean flag = this.getAccountService().add(accountAdmin);
+		return flag ? list() : "add";
+		
+	}
+
+	public String premodify() throws Exception {
+		String id = ServletActionContext.getRequest().getParameter("id");
+		AccountAdmin accountAdmin = this.getAccountService().get(id,AccountAdmin.class);
+		ServletActionContext.getRequest().setAttribute("accountAdmin", accountAdmin);
+		return "modify";
+	}
+
+	public String modify() throws Exception {
+		AccountAdmin accountAdmin = new AccountAdmin();
+		//BeanUtils.populate(account, ServletActionContext.getRequest().getParameterMap());
+		
+		accountAdmin.setId(ServletActionContext.getRequest().getParameter("id"));
+		accountAdmin.setLogincode(ServletActionContext.getRequest().getParameter("logincode"));
+		accountAdmin.setLoginpasswd(ServletActionContext.getRequest().getParameter("loginpasswd"));
+		
+		accountAdmin.setEmail(ServletActionContext.getRequest().getParameter("email"));
+		
+		boolean flag = this.getAccountService().modify(accountAdmin);
+		return flag ? list() : "modify";
+	}
+
+	public String read() throws Exception {
+		String id = ServletActionContext.getRequest().getParameter("id");
+		AccountAdmin accountAdmin = this.getAccountService().get(id,AccountAdmin.class);
+		ServletActionContext.getRequest().setAttribute("accountAdmin", accountAdmin);
+		return "read";
+	}
+	public String remove() throws Exception {
+		String id = ServletActionContext.getRequest().getParameter("id");
+		boolean flag = this.getAccountService().remove(id);
+		return flag ? list() : "remove";
+	}
+	
 	/**
 	 * 注册用户
 	 * 

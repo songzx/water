@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<item id="4ECE78C0F12E11E2BF63E4517F000001">
+		<content>
+			<name><![CDATA[系统设置]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+		<item id="FE92D7D0F14511E2877C29617F000001">
+			<content>
+				<name><![CDATA[菜单管理]]></name>
+				<url><![CDATA[/waterweb/category/list]]></url>
+			</content>
+		</item>
+		<item id="FFAD4880F14511E2877C29617F000001">
+			<content>
+				<name><![CDATA[用户管理]]></name>
+				<url><![CDATA[/waterweb/account/list]]></url>
+			</content>
+		</item>
+		<item id="167B72D0F14611E2B14F36817F000001">
+			<content>
+				<name><![CDATA[勰缇怖翳磬]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="167D2080F14611E2B14F36817F000001">
+			<content>
+				<name><![CDATA[涝茕蕹窠涡]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+	</item>
+	<item id="4EE38761F12E11E2BF63E4517F000001">
+		<content>
+			<name><![CDATA[系统设置1]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+		<item id="FFAB9AD0F14511E2877C29617F000001">
+			<content>
+				<name><![CDATA[晗穸科ソ锡]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+			<item id="FFAF1D40F14511E2877C29617F000001">
+				<content>
+					<name><![CDATA[署莽元穴阱]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+			</item>
+		</item>
+		<item id="FFB278A0F14511E2877C29617F000001">
+			<content>
+				<name><![CDATA[稗塑贤缆虑]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="165E26D0F14611E2B14F36817F000001">
+			<content>
+				<name><![CDATA[诲罄余鏊艺]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+			<item id="167901D0F14611E2B14F36817F000001">
+				<content>
+					<name><![CDATA[甍汴凰煺蹭]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+				<item id="167ECE30F14611E2B14F36817F000001">
+					<content>
+						<name><![CDATA[毁喀氧Ｕ蠕]]></name>
+						<url><![CDATA[javascript:]]></url>
+					</content>
+				</item>
+			</item>
+			<item id="655031F0F14811E2B5E7A8547F000001">
+				<content>
+					<name><![CDATA[皿鳐鹕僬暮]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+			</item>
+			<item id="65556210F14811E2B5E7A8547F000001">
+				<content>
+					<name><![CDATA[锆舐铉左骝]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+			</item>
+			<item id="A252C950F14811E2A0FED7107F000001">
+				<content>
+					<name><![CDATA[捶客芹蝓灏]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+				<item id="A25B06B0F14811E2A0FED7107F000001">
+					<content>
+						<name><![CDATA[¤ゆ债忪冥]]></name>
+						<url><![CDATA[javascript:]]></url>
+					</content>
+					<item id="A26E4090F14811E2A0FED7107F000001">
+						<content>
+							<name><![CDATA[卵辁徜赳崔]]></name>
+							<url><![CDATA[javascript:]]></url>
+						</content>
+					</item>
+				</item>
+			</item>
+			<item id="A25E8920F14811E2A0FED7107F000001">
+				<content>
+					<name><![CDATA[沿兹忙碱评]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+			</item>
+		</item>
+	</item>
+	<item id="4EE694A0F12E11E2BF63E4517F000001">
+		<content>
+			<name><![CDATA[系统设置2]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+		<item id="16807BE0F14611E2B14F36817F000001">
+			<content>
+				<name><![CDATA[璨铳秣犬唬]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+			<item id="A2386380F14811E2A0FED7107F000001">
+				<content>
+					<name><![CDATA[毯奔扬槌冗]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+			</item>
+		</item>
+		<item id="A2544FF0F14811E2A0FED7107F000001">
+			<content>
+				<name><![CDATA[芯ㄚ涡蜒燮]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="A2748220F14811E2A0FED7107F000001">
+			<content>
+				<name><![CDATA[よ搛戒呛验]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+	</item>
+	<item id="4EE81B41F12E11E2BF63E4517F000001">
+		<content>
+			<name><![CDATA[系统设置3]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+		<item id="A0588750F14511E2BB3452477F000001">
+			<content>
+				<name><![CDATA[魇ｆ郾诂尼]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="65538D50F14811E2B5E7A8547F000001">
+			<content>
+				<name><![CDATA[鹾噘掀滴绰]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="A255FDA0F14811E2A0FED7107F000001">
+			<content>
+				<name><![CDATA[篌蜩薤埏屡]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+			<item id="A25CDB70F14811E2A0FED7107F000001">
+				<content>
+					<name><![CDATA[发书悌┖悔]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+			</item>
+		</item>
+		<item id="652DDCE0F14811E2B5E7A8547F000001">
+			<content>
+				<name><![CDATA[冥浈珈砾馓]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="654A3E80F14811E2B5E7A8547F000001">
+			<content>
+				<name><![CDATA[酴樵陇そ徜]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+	</item>
+	<item id="4EE9C8F1F12E11E2BF63E4517F000001">
+		<content>
+			<name><![CDATA[系统设置4]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+		<item id="FFA5CE70F14511E2877C29617F000001">
+			<content>
+				<name><![CDATA[迮媲ゐ劲Ы]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+			<item id="FFA86680F14511E2877C29617F000001">
+				<content>
+					<name><![CDATA[漩筐活ㄌн]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+				<item id="654E5D30F14811E2B5E7A8547F000001">
+					<content>
+						<name><![CDATA[嗯厚霪な谏]]></name>
+						<url><![CDATA[javascript:]]></url>
+					</content>
+				</item>
+				<item id="A2595900F14811E2A0FED7107F000001">
+					<content>
+						<name><![CDATA[错咨剞窑泛]]></name>
+						<url><![CDATA[javascript:]]></url>
+					</content>
+				</item>
+				<item id="A27126C0F14811E2A0FED7107F000001">
+					<content>
+						<name><![CDATA[逆搴抽茱摇]]></name>
+						<url><![CDATA[javascript:]]></url>
+					</content>
+				</item>
+			</item>
+			<item id="A257D260F14811E2A0FED7107F000001">
+				<content>
+					<name><![CDATA[佚⒊蹴姚廒]]></name>
+					<url><![CDATA[javascript:]]></url>
+				</content>
+			</item>
+		</item>
+		<item id="FFAA1430F14511E2877C29617F000001">
+			<content>
+				<name><![CDATA[辋农晃铖店]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="654CAF80F14811E2B5E7A8547F000001">
+			<content>
+				<name><![CDATA[差漪禁牟毛]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="A2503140F14811E2A0FED7107F000001">
+			<content>
+				<name><![CDATA[咳疔吹爸沱]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+		<item id="A272D470F14811E2A0FED7107F000001">
+			<content>
+				<name><![CDATA[氪悝平渖犴]]></name>
+				<url><![CDATA[javascript:]]></url>
+			</content>
+		</item>
+	</item>
+</root>

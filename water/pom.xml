@@ -20,6 +20,7 @@
 	<modules>
 		<module>watermetamodel</module>
 		<module>waterweb</module>
+		<module>jmsactivemqserver</module>
 	</modules>
 
 	<dependencies>
@@ -262,15 +263,30 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>2.0.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz-oracle</artifactId>
-			<version>2.0.2</version>
-		</dependency> 
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.19</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.7.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -364,6 +380,11 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>activemq</id>
+			<name>activemq SNAPSHOT Repository</name>
+			<url>https://repository.apache.org/content/repositories/snapshots/</url>
 		</repository>
 	</repositories>
 </project>

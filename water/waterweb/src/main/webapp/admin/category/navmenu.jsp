@@ -1,3 +1,4 @@
+<%@page import="org.apache.struts2.ServletActionContext"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.water.metamodel.tree.Category"%>
 <%@page import="java.util.List"%>
@@ -13,7 +14,7 @@ public StringBuffer getcategorytree(List<Category> categorys,String id){
 				sb.append("<ul>");
 				index ++;
 			}
-			sb.append("<li><a href=\""+(category.getUrl()==null?"javascript:":category.getUrl())+"\" target=\"navTab\" rel=\""+category.getId()+"\">"+category.getName()+"</a>");
+			sb.append("<li><a href=\""+(category.getUrl()==null?"javascript:":("/waterweb"+ category.getUrl()))+"\" target=\"navTab\" rel=\""+category.getId()+"\" external=\"true\" >"+category.getName()+"</a>");
 			sb.append(getcategorytree(categorys, category.getId()));
 			sb.append("</li>");
 		}
@@ -36,7 +37,7 @@ for(Category category : categorys){
 	//System.out.println("0".equals(tmpmap.get("PARENTID").toString())+"["+tmpmap.get("PARENTID").toString()+"]");
 	
 	if(categoryid.equals(category.getParentid())){
-		sb.append("<li><a href=\""+(category.getUrl()==null?"javascript:":category.getUrl())+"\" target=\"navTab\" rel=\""+category.getId()+"\">"+category.getName()+"</a>");
+		sb.append("<li><a href=\""+(category.getUrl()==null?"javascript:":("/waterweb"+ category.getUrl()))+"\" target=\"navTab\" rel=\""+category.getId()+"\" external=\"true\" >"+category.getName()+"</a>");
 		sb.append(getcategorytree(categorys, category.getId()));
 		sb.append("</li>");
 	}
@@ -51,5 +52,4 @@ for(Category category : categorys){
 				<%=sb.toString() %>
 			</ul>
 		</div>
-		
-	</div>
+</div>

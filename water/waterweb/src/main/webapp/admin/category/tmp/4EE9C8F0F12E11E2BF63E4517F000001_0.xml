@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<item id="4ECE78C0F12E11E2BF63E4517F000001">
+		<content>
+			<id><![CDATA[4ECE78C0F12E11E2BF63E4517F000001]]></id>
+			<name><![CDATA[系统设置]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+	</item>
+	<item id="4EE38761F12E11E2BF63E4517F000001">
+		<content>
+			<id><![CDATA[4EE38761F12E11E2BF63E4517F000001]]></id>
+			<name><![CDATA[系统设置1]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+	</item>
+	<item id="4EE694A0F12E11E2BF63E4517F000001">
+		<content>
+			<id><![CDATA[4EE694A0F12E11E2BF63E4517F000001]]></id>
+			<name><![CDATA[系统设置2]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+	</item>
+	<item id="4EE81B41F12E11E2BF63E4517F000001">
+		<content>
+			<id><![CDATA[4EE81B41F12E11E2BF63E4517F000001]]></id>
+			<name><![CDATA[系统设置3]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+	</item>
+	<item id="4EE9C8F1F12E11E2BF63E4517F000001">
+		<content>
+			<id><![CDATA[4EE9C8F1F12E11E2BF63E4517F000001]]></id>
+			<name><![CDATA[系统设置4]]></name>
+			<url><![CDATA[javascript:]]></url>
+		</content>
+	</item>
+</root>

@@ -7,6 +7,10 @@
 	<package name="category" namespace="/category" extends="basicstruts2">
 		<action name="*" class="categoryAction" method="{1}">
 			<result name="success">/admin/category/navmenu.jsp</result>
+			<result name="list">/admin/category/list.jsp</result>
+			<result name="add">/admin/category/add.jsp</result>
+			<result name="modify">/admin/category/modify.jsp</result>
+			<result name="read">/admin/category/read.jsp</result>
 		</action>
 	</package>
 </struts>

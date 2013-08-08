@@ -13,12 +13,10 @@ public abstract class Account_ {
 
 	public static volatile SingularAttribute<Account, String> updater;
 	public static volatile SingularAttribute<Account, Date> lastlogindate;
-	public static volatile SingularAttribute<Account, AccountWeb> accountWeb;
 	public static volatile SingularAttribute<Account, Date> createdate;
 	public static volatile SingularAttribute<Account, String> creater;
 	public static volatile SingularAttribute<Account, Integer> accountstatus;
 	public static volatile ListAttribute<Account, AccountLog> accountLogs;
-	public static volatile SingularAttribute<Account, AccountAdmin> accountAdmin;
 	public static volatile SingularAttribute<Account, String> id;
 	public static volatile SingularAttribute<Account, String> loginpasswd;
 	public static volatile SingularAttribute<Account, String> username;

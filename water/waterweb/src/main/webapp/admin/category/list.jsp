@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>列表</title>
+<title>Insert title here</title>
 </head>
 <body>
-
+<div style="float: left; display: block; overflow: auto; width: 240px;">
+<iframe src="/waterweb/admin/category/lefttree.jsp" frameborder="0" width="100%" height="100%" id="treeframe"></iframe>
+</div>
+<div style="margin-left: 246px;">
+aaaaaaaaaaaa
+</div>
 </body>
 </html>

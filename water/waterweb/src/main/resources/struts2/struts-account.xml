@@ -9,6 +9,10 @@
 			<result name="success">/admin/index.jsp</result>
 			<result name="login">/admin/login.jsp</result>
 			<result name="loginout">/admin/login.jsp</result>
+			<result name="list">/admin/account/list.jsp</result>
+			<result name="add">/admin/account/add.jsp</result>
+			<result name="modify">/admin/account/modify.jsp</result>
+			<result name="read">/admin/account/read.jsp</result>
 		</action>
 	</package>
 </struts>

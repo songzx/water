@@ -51,5 +51,6 @@ public class CategoryDao extends JpaBasiceDao{
 		return entityManager.createQuery(criteriaQuery).getResultList();*/
 		
 	}
+
 	
 }

@@ -13,10 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "AUTH_ACCOUNT_WEB")
-public class AccountWeb {
-	@Id
-	@Column(length = 50)
-	private String id;
+@PrimaryKeyJoinColumn(name="id")
+public class AccountWeb extends Account {
 	@Column(length = 50)
 	private String email;// 邮件
 	@Column(length = 11)
@@ -26,21 +24,6 @@ public class AccountWeb {
 	@Column(length = 20)
 	private String truename;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@MapsId("id")
-	//@JoinColumn(name="id")
-	//@OneToOne(targetEntity=Account.class, cascade={CascadeType.ALL}, mappedBy="accountAdmin")  
-    @PrimaryKeyJoinColumn(name="id", referencedColumnName="id") 
-	public Account account;
-
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;

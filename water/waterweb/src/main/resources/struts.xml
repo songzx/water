@@ -29,7 +29,7 @@
 	<package name="basicstruts2" extends="struts-default">
 		<!-- setup the default-stack exception mapping interceptor so that any 
 			exceptions not caught by this application will be logged and then handled 
-			by the global exception mapping
+			by the global exception mapping-->
 		<interceptors>
 			<interceptor-stack name="appDefault">
 				<interceptor-ref name="defaultStack">
@@ -39,7 +39,7 @@
 			</interceptor-stack>
 		</interceptors>
 
-		<default-interceptor-ref name="appDefault" /> -->
+		<default-interceptor-ref name="appDefault" /> 
 
 		<global-results>
 			<result name="error">/error/error.jsp</result>

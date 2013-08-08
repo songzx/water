@@ -33,7 +33,7 @@ public class QuartzExample {
 	@Autowired
     Environment env;
 
-	@Scheduled(cron = "0/5 * * * * ?")
+	@Scheduled(cron = "0 0 1 * * ?")
 	protected void execute() throws UnsupportedEncodingException {
 		// TODO Auto-generated method stub
 		logger.info("执行定时器－－－－－－－－－－－－－－－－－－－－－－－");

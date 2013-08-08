@@ -24,7 +24,8 @@ import org.hibernate.annotations.GenericGenerator;
 public class AccountLog {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO,generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	@Column(length = 50)
 	private String id;
 	@Temporal(TemporalType.TIMESTAMP)

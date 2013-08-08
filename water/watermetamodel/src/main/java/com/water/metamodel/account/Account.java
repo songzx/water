@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -51,6 +53,7 @@ import com.water.metamodel.tree.Category;
  * @SecondaryTable(name="AUTH_ACCOUNT_WEB",pkJoinColumns=@PrimaryKeyJoinColumn(
  * referencedColumnName="id",name="id")) })
  */
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Account implements Serializable {
 	public static final int ACCOUNT_TYPE_ADMIN = 0;
 	public static final int ACCOUNT_TYPE_WEB_PERSON = 1;
@@ -62,7 +65,8 @@ public class Account implements Serializable {
 	private final static int ACCOUNT_STATUS_REMOVE = 3;// 删除
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO,generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	@Column(length = 50)
 	private String id;
 	@Column(nullable = false, unique = true, length = 50)
@@ -90,17 +94,6 @@ public class Account implements Serializable {
 	private String updater;
 	private Date updatedate;
 
-	@OneToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, fetch = FetchType.LAZY)
-	// @MapsId
-	@JoinColumn(name = "id")
-	// @PrimaryKeyJoinColumn
-	private AccountAdmin accountAdmin;
-
-	@OneToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, fetch = FetchType.LAZY)
-	// @MapsId
-	@JoinColumn(name = "id")
-	// @PrimaryKeyJoinColumn
-	public AccountWeb accountWeb;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<AccountLog> accountLogs = new ArrayList<AccountLog>();;
@@ -221,21 +214,6 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
-	public AccountAdmin getAccountAdmin() {
-		return accountAdmin;
-	}
-
-	public void setAccountAdmin(AccountAdmin accountAdmin) {
-		this.accountAdmin = accountAdmin;
-	}
-
-	public AccountWeb getAccountWeb() {
-		return accountWeb;
-	}
-
-	public void setAccountWeb(AccountWeb accountWeb) {
-		this.accountWeb = accountWeb;
-	}
 
 	public List<AccountLog> getAccountLogs() {
 		return accountLogs;

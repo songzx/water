@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -18,18 +19,9 @@ import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "AUTH_ACCOUNT_ADMIN")
-public class AccountAdmin implements Serializable {
+@PrimaryKeyJoinColumn(name="id")
+public class AccountAdmin extends Account {
 
-	@Id
-	@Column(length = 50)
-	private String id;
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@MapsId("id")
-	//@JoinColumn(name="id")
-	//@OneToOne(targetEntity=Account.class, cascade={CascadeType.ALL}, mappedBy="accountAdmin")  
-    @PrimaryKeyJoinColumn(name="id", referencedColumnName="id")  
-	public Account account;
 
 	@Column(length = 50)
 	private String email;// 邮件
@@ -38,13 +30,6 @@ public class AccountAdmin implements Serializable {
 	@Column(length = 12)
 	private String telephone;// 固话
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;
@@ -70,12 +55,5 @@ public class AccountAdmin implements Serializable {
 		this.telephone = telephone;
 	}
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
 
 }

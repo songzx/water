@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+     http://www.springframework.org/schema/jms 
+     http://www.springframework.org/schema/jms/spring-jms-3.2.xsd
+     http://www.springframework.org/schema/jee
+     http://www.springframework.org/schema/jee/spring-jee-3.2.xsd">
+
+	<!-- 
+	<jee:jndi-lookup id="eciConnectionFactory" jndi-name="eis/cicseci" />
+	 -->
+
+	<!-- <jee:jndi-lookup id="eciConnectionFactory" jndi-name="eis/cicseci" /> 等同 
+	<bean id="eciManagedConnectionFactory" class="com.ibm.connector2.cics.ECIManagedConnectionFactory">
+		<property name="serverName" value="TXSERIES" />
+		<property name="connectionURL" value="tcp://localhost/" />
+		<property name="portNumber" value="2006" />
+	</bean>
+
+	<bean id="eciConnectionFactory" class="org.springframework.jca.support.LocalConnectionFactoryBean">
+		<property name="managedConnectionFactory" ref="eciManagedConnectionFactory" />
+	</bean>
+	-->
+	
+	<!-- 不同的connectFactory
+	<bean id="eciManagedConnectionFactory" class="com.ibm.connector2.cics.ECIManagedConnectionFactory">
+		<property name="serverName" value="TEST" />
+		<property name="connectionURL" value="tcp://localhost/" />
+		<property name="portNumber" value="2006" />
+	</bean>
+
+	<bean id="targetEciConnectionFactory" class="org.springframework.jca.support.LocalConnectionFactoryBean">
+		<property name="managedConnectionFactory" ref="eciManagedConnectionFactory" />
+	</bean>
+
+	<bean id="eciConnectionFactory" class="org.springframework.jca.cci.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="targetEciConnectionFactory" />
+	</bean>
+	 -->
+
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic" autowire="constructor">
+		<constructor-arg value="com.spring.xkey.jms.topic" />
+	</bean>
+
+	<bean id="sendMessage" class="com.spring.xkey.jms.SendMessage">
+		<property name="username" value="admin" />
+		<property name="password" value="admin" />
+	</bean>
+
+	<bean id="jmsMessageConverter" class="com.spring.xkey.jms.JmsMessageConverter">
+		<property name="sendMessage" ref="sendMessage" />
+	</bean>
+
+	<!-- 创建JMS发送信息的模板的对象 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<!--property name="defaultDestination" ref="topicDestination"/ -->
+		<property name="receiveTimeout" value="6000" />
+		<property name="messageConverter" ref="jmsMessageConverter" />
+	</bean>
+
+	<bean id="jmsMessageListener" class="com.spring.xkey.jms.JmsMessageListener">
+	</bean>
+
+	<bean id="publisher" class="com.spring.xkey.jms.Publisher">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="destinations" ref="topicDestination" />
+		<property name="sendMessage" ref="sendMessage" />
+
+	</bean>
+
+	<bean id="consumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="topicDestination" />
+		<property name="messageListener" ref="jmsMessageListener" />
+	</bean>
+
+	<jms:jca-listener-container>
+
+	</jms:jca-listener-container>
+
+	<jms:listener-container>
+		<jms:listener destination="topicDestination" ref="orderService" method="placeOrder" />
+		<jms:listener destination="queue.orders" ref="orderService" method="placeOrder" />
+		<jms:listener destination="queue.confirmations" ref="confirmationLogger" method="log" />
+	</jms:listener-container>
+</beans>
