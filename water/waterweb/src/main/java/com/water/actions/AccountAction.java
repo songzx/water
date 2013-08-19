@@ -44,6 +44,7 @@ import com.water.services.IAccountService;
 public class AccountAction extends ActionSupport {
 
 	private static Logger logger = LoggerFactory.getLogger(AccountAction.class);
+	
 	@Resource
 	private IAccountService accountService;
 	private Account account;
@@ -115,7 +116,7 @@ public class AccountAction extends ActionSupport {
 		pageBean.setPageSize(ValidateUtil.getInstance().checkInt(ServletActionContext.getRequest().getParameter("pageSize"), 2, 100));
 		pageBean.setCurPage(ValidateUtil.getInstance().checkInt(ServletActionContext.getRequest().getParameter("curPage"), 1));
 		
-		pageBean.getParams().put("keyword", ServletActionContext.getRequest().getParameter("keyword")==null?"":ServletActionContext.getRequest().getParameter("keyword"));
+		pageBean.getParams().putAll(ServletActionContext.getRequest().getParameterMap());
 		this.getAccountService().list(pageBean);
 		ServletActionContext.getRequest().setAttribute("pageBean", pageBean);
 		return "list";
@@ -167,54 +168,6 @@ public class AccountAction extends ActionSupport {
 		return flag ? list() : "remove";
 	}
 	
-	/**
-	 * 注册用户
-	 * 
-	 * @param request
-	 * @param response
-	 * @param entityManager
-	 * @throws Exception
-	 */
-	public void regedit(HttpServletRequest request, HttpServletResponse response, EntityManager entityManager) throws Exception {
-		Object obj = request.getSession().getAttribute("loginaccount");
-		if (obj != null) {
-			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
-			return;
-		}
-
-		String logincode = request.getParameter("logincode");
-		String loginpasswd = request.getParameter("loginpasswd");
-		String username = request.getParameter("username");
-		String idcard = request.getParameter("idcard");
-		String regedittype = request.getParameter("regedittype");
-
-		// 组装实体类
-		/*
-		 * Account account = null; Person person = null; if
-		 * (Account.ACCOUNT_REGEDITTYPE_PERSON.equalsIgnoreCase(regedittype)) {
-		 * person = new Person(); person.setIdcard(idcard);
-		 * 
-		 * person.setLogincode(logincode); person.setCreatedate(new Date());
-		 * person.setLastlogindate(new Date()); person.setUsername(username);
-		 * person.setLogincount(1); person.setLoginpasswd(loginpasswd);
-		 * person.setRegedittype(regedittype);
-		 * person.setStatus(Account.ACCOUNT_STATUS_ENABLE);
-		 * person.setUpdatedate(new Date()); account = person; } else if
-		 * (Account
-		 * .ACCOUNT_REGEDITTYPE_ENTERPRISE.equalsIgnoreCase(regedittype)) { //
-		 * account.setEnterprise(enterprise); } else { logger.error("注册类型非法：" +
-		 * regedittype);
-		 * request.getRequestDispatcher("/error/500.jsp").forward(request,
-		 * response); return; } //AccountLevel accountLevel = new
-		 * AccountLevel(); //accountLevel.setName("一级用户");
-		 * //account.setAccountlevel(accountLevel);
-		 * 
-		 * person = (Person)accountService.createAccount(person, entityManager);
-		 * if (account != null) { loginWebBusiness(request, response, account);
-		 * }
-		 */
-	}
-
 
 	public IAccountService getAccountService() {
 		return accountService;

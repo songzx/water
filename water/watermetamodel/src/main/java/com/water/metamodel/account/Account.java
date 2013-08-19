@@ -19,6 +19,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -29,8 +30,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.cxf.staxutils.DepthXMLStreamReader;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.water.metamodel.authz.Role;
 import com.water.metamodel.tree.Category;
 
 /**
@@ -53,7 +56,7 @@ import com.water.metamodel.tree.Category;
  * @SecondaryTable(name="AUTH_ACCOUNT_WEB",pkJoinColumns=@PrimaryKeyJoinColumn(
  * referencedColumnName="id",name="id")) })
  */
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Account implements Serializable {
 	public static final int ACCOUNT_TYPE_ADMIN = 0;
 	public static final int ACCOUNT_TYPE_WEB_PERSON = 1;
@@ -65,8 +68,8 @@ public class Account implements Serializable {
 	private final static int ACCOUNT_STATUS_REMOVE = 3;// 删除
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO,generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@Column(length = 50)
 	private String id;
 	@Column(nullable = false, unique = true, length = 50)
@@ -94,13 +97,18 @@ public class Account implements Serializable {
 	private String updater;
 	private Date updatedate;
 
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<AccountLog> accountLogs = new ArrayList<AccountLog>();;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-	@JoinTable(name="auth_account_category")
+	@JoinTable(name = "auth_account_category")
 	private List<Category> categories = new ArrayList<Category>();
+
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "accounts")
+	private List<Role> roles = new ArrayList<Role>();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Department department;
 
 	public String getUsername() {
 		return username;
@@ -214,13 +222,28 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
-
 	public List<AccountLog> getAccountLogs() {
 		return accountLogs;
 	}
 
 	public void setAccountLogs(List<AccountLog> accountLogs) {
 		this.accountLogs = accountLogs;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	public List<Category> getCategories() {

@@ -1,5 +1,6 @@
 package com.water.metamodel.account;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "AUTH_ACCOUNT_LOG")
-public class AccountLog {
+public class AccountLog implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO,generator="system-uuid")

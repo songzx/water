@@ -25,6 +25,11 @@
 	</listener>
 
 	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter>
 		<description>gtdadmin后台过滤器</description>
 		<filter-name>wateradminfilter</filter-name>
 		<filter-class>com.water.filter.WaterAdminFilter</filter-class>
@@ -36,6 +41,11 @@
 	</filter>
 
 	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
@@ -44,14 +54,14 @@
 		<filter-name>wateradminfilter</filter-name>
 		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
-	
+
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
 			<el-ignored>true</el-ignored>
 		</jsp-property-group>
 	</jsp-config>
-	
+
 	<error-page>
 		<error-code>404</error-code>
 		<location>/error/404.jsp</location>

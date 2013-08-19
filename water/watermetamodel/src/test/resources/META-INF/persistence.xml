@@ -11,8 +11,13 @@
 		<class>com.water.metamodel.account.AccountWeb</class>
 		<class>com.water.metamodel.account.AccountLog</class>
 		<class>com.water.metamodel.account.AccountOperatorLog</class>
+		<class>com.water.metamodel.account.Department</class>
 
 		<class>com.water.metamodel.tree.Category</class>
+		
+		<class>com.water.metamodel.authz.Authentication</class>
+		<class>com.water.metamodel.authz.Resource</class>
+		<class>com.water.metamodel.authz.Role</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />

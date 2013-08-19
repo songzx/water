@@ -1,5 +1,6 @@
 package com.water.metamodel.account;
 
+import com.water.metamodel.authz.Role;
 import com.water.metamodel.tree.Category;
 import java.util.Date;
 import javax.annotation.Generated;
@@ -13,6 +14,7 @@ public abstract class Account_ {
 
 	public static volatile SingularAttribute<Account, String> updater;
 	public static volatile SingularAttribute<Account, Date> lastlogindate;
+	public static volatile SingularAttribute<Account, Department> department;
 	public static volatile SingularAttribute<Account, Date> createdate;
 	public static volatile SingularAttribute<Account, String> creater;
 	public static volatile SingularAttribute<Account, Integer> accountstatus;
@@ -20,6 +22,7 @@ public abstract class Account_ {
 	public static volatile SingularAttribute<Account, String> id;
 	public static volatile SingularAttribute<Account, String> loginpasswd;
 	public static volatile SingularAttribute<Account, String> username;
+	public static volatile ListAttribute<Account, Role> roles;
 	public static volatile SingularAttribute<Account, String> aliasname;
 	public static volatile SingularAttribute<Account, String> logincode;
 	public static volatile SingularAttribute<Account, String> accountfrom;

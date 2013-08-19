@@ -1,5 +1,7 @@
 package com.water.metamodel.account;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "AUTH_OPERATOR_LOG")
-public class AccountOperatorLog {
+public class AccountOperatorLog implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO,generator="system-uuid")

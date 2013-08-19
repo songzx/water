@@ -75,8 +75,8 @@ public class AccountDao extends JpaBasiceDao {
 			pageBean.setTotalrows(Integer.parseInt(count == null ? "0" : count.toString()));
 
 			List result = entityManager.createQuery("select account from AccountAdmin account where account.logincode like :logincode or account.email like :email")
-					.setParameter("logincode", "%"+pageBean.getParams().get("keyword")+"%")
-					.setParameter("email", "%"+pageBean.getParams().get("keyword")+"%").setFirstResult(pageBean.getStartrows()).setMaxResults(pageBean.getPageSize()).getResultList();
+					.setParameter("logincode", "%"+(pageBean.getParams().get("keyword")==null?"":pageBean.getParams().get("keyword"))+"%")
+					.setParameter("email", "%"+(pageBean.getParams().get("keyword")==null?"":pageBean.getParams().get("keyword"))+"%").setFirstResult(pageBean.getStartrows()).setMaxResults(pageBean.getPageSize()).getResultList();
 			// List<Map<String,Object>> tresult = new
 			// ArrayList<Map<String,Object>>();
 			// for(Account account : result){

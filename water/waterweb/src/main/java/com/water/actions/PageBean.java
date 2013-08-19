@@ -63,7 +63,7 @@ public class PageBean {
 
 	public int getEndrows() {
 		endrows = curPage * pageSize;
-		return endrows > totalPages ? totalPages : endrows;
+		return endrows >= totalrows ? totalrows : endrows;
 	}
 
 	public void setEndrows(int endrows) {
