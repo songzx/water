@@ -37,13 +37,10 @@ import com.water.metamodel.authz.Role;
 import com.water.metamodel.tree.Category;
 
 /**
- * 用户对象
  * 
- * @todo TODO
  * @author 0000
- * @date Feb 14, 2013 1:45:30 AM
- * @version 1.0
- * @classname User
+ * @date Aug 25, 2013
+ * @version V1.0
  */
 @Entity
 @Table(name = "AUTH_ACCOUNT")
@@ -89,6 +86,11 @@ public class Account implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastlogindate = new Date();
 	private String accountfrom = "water";// 默认注册来源“water”
+	private int isadmin = 0;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date activestartdate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date activeenddate;
 
 	private String creater;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -99,10 +101,6 @@ public class Account implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<AccountLog> accountLogs = new ArrayList<AccountLog>();;
-
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-	@JoinTable(name = "auth_account_category")
-	private List<Category> categories = new ArrayList<Category>();
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "accounts")
 	private List<Role> roles = new ArrayList<Role>();
@@ -246,12 +244,27 @@ public class Account implements Serializable {
 		this.department = department;
 	}
 
-	public List<Category> getCategories() {
-		return categories;
+	public int getIsadmin() {
+		return isadmin;
 	}
 
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
+	public void setIsadmin(int isadmin) {
+		this.isadmin = isadmin;
 	}
 
+	public Date getActivestartdate() {
+		return activestartdate;
+	}
+
+	public void setActivestartdate(Date activestartdate) {
+		this.activestartdate = activestartdate;
+	}
+
+	public Date getActiveenddate() {
+		return activeenddate;
+	}
+
+	public void setActiveenddate(Date activeenddate) {
+		this.activeenddate = activeenddate;
+	}
 }

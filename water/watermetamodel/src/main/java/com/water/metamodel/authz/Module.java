@@ -24,8 +24,8 @@ import com.water.metamodel.account.Account;
  * @version V1.0
  */
 @Entity
-@Table(name = "AUTHENTICATION")
-public class Authentication implements Serializable {
+@Table(name = "AUTH_MODULE")
+public class Module implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")

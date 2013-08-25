@@ -84,9 +84,9 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
 		Iterator<String> ite = resourceMap.keySet().iterator();
 		while (ite.hasNext()) {
 			String resURL = ite.next();
-			if (urlMatcher.pathMatchesUrl(url, resURL)) {
-				return resourceMap.get(resURL);
-			}
+			//if (urlMatcher.pathMatchesUrl(url, resURL)) {
+				//return resourceMap.get(resURL);
+			//}
 		}
 		return null;
 	}

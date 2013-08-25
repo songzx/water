@@ -1,17 +1,23 @@
 package com.water.metamodel.tree;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.water.metamodel.authz.Role;
 
 /**
  * 树，栏目
@@ -21,7 +27,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @version V1.0
  */
 @Entity
-@Table(name = "WATER_CATEGORY")
+@Table(name = "AUTH_CATEGORY")
 public class Category implements Serializable {
 	public static int CATEGORYTYPE_CATEGORY = 0;// 普通栏目
 	public static int CATEGORYTYPE_MENU = 1;// 菜单
@@ -30,8 +36,8 @@ public class Category implements Serializable {
 	public static int CATEGORYSTATUS_ENABLE = 1;// 启用
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO,generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@Column(length = 50)
 	private String id;
 	@Column(nullable = false, unique = true, length = 50)
@@ -40,8 +46,13 @@ public class Category implements Serializable {
 	private String name;// 帐号
 	@Column(length = 50)
 	private String abbreviation;// 简称
-	private String status;
+	private int enabled;
+	private String type;
 	private String categorytype;
+	private String otherproperties;// xml属性
+
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories")
+	private List<Role> roles = new ArrayList<Role>();
 
 	@Column(length = 100)
 	private String imgsrc;
@@ -75,20 +86,12 @@ public class Category implements Serializable {
 		this.abbreviation = abbreviation;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public String getCategorytype() {
@@ -122,4 +125,37 @@ public class Category implements Serializable {
 	public void setParentid(String parentid) {
 		this.parentid = parentid;
 	}
+
+	public String getOtherproperties() {
+		return otherproperties;
+	}
+
+	public void setOtherproperties(String otherproperties) {
+		this.otherproperties = otherproperties;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
 }

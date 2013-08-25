@@ -15,7 +15,7 @@
 		
 		<class>com.water.metamodel.tree.Category</class>
 		
-		<class>com.water.metamodel.authz.Authentication</class>
+		<class>com.water.metamodel.authz.Module</class>
 		<class>com.water.metamodel.authz.Resource</class>
 		<class>com.water.metamodel.authz.Role</class>
 
