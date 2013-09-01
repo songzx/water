@@ -13,12 +13,12 @@ if(obj != null){
 <title>登陆</title>
 </head>
 <body>
-	<form action="/waterweb/account/login" method="post">
+	<form action="/waterweb/j_spring_security_check" method="post">
 		<fieldset>
 			<legend>登陆</legend>
 			<ul>
-				<li><span>帐号：<input type="text" name="account.logincode" /></span></li>
-				<li><span>密码：<input type="password" name="account.loginpasswd" /></span></li>
+				<li><span>帐号：<input type="text" name="j_username" /></span></li>
+				<li><span>密码：<input type="password" name="j_password" /></span></li>
 				<li><input type="submit" value="登陆" />&nbsp;<a href="/oauthexample/account/regeditfrom.jsp">注册</a></li>
 			</ul>
 		</fieldset>
