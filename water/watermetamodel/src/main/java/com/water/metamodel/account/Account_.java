@@ -30,7 +30,6 @@ public abstract class Account_ {
 	public static volatile SingularAttribute<Account, Integer> accounttype;
 	public static volatile SingularAttribute<Account, Date> updatedate;
 	public static volatile SingularAttribute<Account, Long> logincount;
-	public static volatile SingularAttribute<Account, Integer> isadmin;
 
 }
 

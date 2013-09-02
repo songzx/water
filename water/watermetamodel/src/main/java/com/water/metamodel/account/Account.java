@@ -86,7 +86,6 @@ public class Account implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastlogindate = new Date();
 	private String accountfrom = "water";// 默认注册来源“water”
-	private int isadmin = 0;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date activestartdate;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -242,14 +241,6 @@ public class Account implements Serializable {
 
 	public void setDepartment(Department department) {
 		this.department = department;
-	}
-
-	public int getIsadmin() {
-		return isadmin;
-	}
-
-	public void setIsadmin(int isadmin) {
-		this.isadmin = isadmin;
 	}
 
 	public Date getActivestartdate() {

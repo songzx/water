@@ -116,7 +116,7 @@ public class QueryTest {
 		List<Category> categorys = entityManager.createQuery("select categories from Account account join account.categories categories where account.id = :accountid and categories.parentid =:parentid", Category.class).setParameter("parentid", "0").setParameter("accountid", "4EE9C8F0F12E11E2BF63E4517F000001").getResultList();
 		System.out.println(categorys);
 
-		System.out.println(entityManager.find(Account.class, "4EE9C8F0F12E11E2BF63E4517F000001").getCategories());
+		//System.out.println(entityManager.find(Account.class, "4EE9C8F0F12E11E2BF63E4517F000001").getCategories());
 	}
 
 	@Test

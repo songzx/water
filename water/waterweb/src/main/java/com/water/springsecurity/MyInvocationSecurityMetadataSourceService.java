@@ -9,13 +9,18 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.views.freemarker.tags.URLModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
+import org.springframework.security.config.http.MatcherType;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.util.AnyRequestMatcher;
+import org.springframework.security.web.util.RequestMatcher;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,15 +32,15 @@ import org.springframework.stereotype.Service;
  * @date Aug 17, 2013
  * @version V1.0
  */
-@Service
+@Service("myInvocationSecurityMetadataSourceService")
 public class MyInvocationSecurityMetadataSourceService implements FilterInvocationSecurityMetadataSource {
 	private Logger logger = LoggerFactory.getLogger(MyInvocationSecurityMetadataSourceService.class);
-	
+
 	@PersistenceContext(unitName = "authorityunit")
 	private EntityManager entityManager;
+	private static Map<String, Collection<ConfigAttribute>> resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
 
-	private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
-
+	// private UrlMatcher urlMatcher = new AntUrlPathMatche();
 	public MyInvocationSecurityMetadataSourceService() {
 		loadResourceDefine();
 	}
@@ -44,51 +49,49 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
 	 * 初始化资源
 	 */
 	private void loadResourceDefine() {
-		logger.info("初始化权限资源starting ----------------------");
-		
-		String sql = "select authority_name from pub_authorities";
-		List<String> query = entityManager.createNativeQuery(sql).getResultList();
-		resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
 
-		for (String auth : query) {
-			ConfigAttribute ca = new SecurityConfig(auth);
-			List<String> result = entityManager.createNativeQuery("select b.resource_string from Pub_Authorities_Resources a, Pub_Resources b, " + "Pub_authorities c where a.resource_id = b.resource_id and a.authority_id=c.authority_id and c.Authority_name= ?").setParameter(1, auth).getResultList();
-			for (String url : result) {
-				if (resourceMap.containsKey(url)) {
-					Collection<ConfigAttribute> value = resourceMap.get(url);
-					value.add(ca);
-					resourceMap.put(url, value);
-				} else {
-					Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>();
-					atts.add(ca);
-					resourceMap.put(url, atts);
-				}
-			}
-		}
+		logger.info("初始化权限资源starting ----------------------");
+		resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
+		Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>();
+		ConfigAttribute ca = new SecurityConfig("ROLE_GUEST");
+		atts.add(ca);
+		resourceMap.put("/admin/singleindex.jsp", atts);
+
+		Collection<ConfigAttribute> atts2 = new ArrayList<ConfigAttribute>();
+		ConfigAttribute ca2 = new SecurityConfig("ROLE_ADMIN");
+		atts2.add(ca2);
+		resourceMap.put("/admin/index.jsp", atts2);
+		resourceMap.put("/account/login", atts2);
+
 	}
 
 	@Override
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+
+	/**
+	 * As Spring Security 3.1, UrlMatcher, RegexUrlPathMatcher, and AntUrlPathMatcher are removed and their functions are replaced by another class org.springframework.security.web.util.RequestMatcher and org.springframework.security.config.http.MatcherType
+	 */
 	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-		// object 是一个URL，被用户请求的url。
+		// guess object is a URL.
 		String url = ((FilterInvocation) object).getRequestUrl();
-		int firstQuestionMarkIndex = url.indexOf("?");
-		if (firstQuestionMarkIndex != -1) {
-			url = url.substring(0, firstQuestionMarkIndex);
+		if(logger.isDebugEnabled()){
+			logger.debug("access url : "+url);
 		}
 		Iterator<String> ite = resourceMap.keySet().iterator();
+		//RequestMatcher requestMatcher = new RegexRequestMatcher();
 		while (ite.hasNext()) {
 			String resURL = ite.next();
-			//if (urlMatcher.pathMatchesUrl(url, resURL)) {
-				//return resourceMap.get(resURL);
-			//}
+			// if (urlMatcher.pathMatchesUrl(url, resURL)) {
+			//logger.debug(requestMatcher.);
+			return resourceMap.get(resURL);
+			// }
 		}
 		return null;
+		//return resourceMap.get("/index.jsp");
 	}
 
 	@Override

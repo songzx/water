@@ -24,9 +24,9 @@ import com.water.services.IAccountService;
 
 @Component("accountAction")
 @Scope("prototype")
-public class AccountAction extends ActionSupport {
+public class CopyOfAccountAction extends ActionSupport {
 
-	private static Logger logger = LoggerFactory.getLogger(AccountAction.class);
+	private static Logger logger = LoggerFactory.getLogger(CopyOfAccountAction.class);
 
 	@Resource
 	private IAccountService accountService;

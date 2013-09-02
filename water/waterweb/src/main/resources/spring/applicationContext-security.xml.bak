@@ -13,6 +13,8 @@
      http://www.springframework.org/schema/security
      http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
+	<security:debug />
+
 	<security:global-method-security pre-post-annotations="enabled" />
 
 	<bean id="myFilterSecurityInterceptor" class="com.water.springsecurity.MyFilterSecurityInterceptor">
@@ -38,7 +40,6 @@
 	<!-- 用户的密码加密或解密 -->
 	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
 
-
 	<!-- 启用用户的缓存功能 -->
 	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" />
 
@@ -57,25 +58,21 @@
 	<security:http pattern="/**/*.gif" security="none" />
 	<security:http pattern="/**/*.css" security="none" />
 	<security:http pattern="/**/*.js" security="none" />
+	<!-- 登录页面和忘记密码页面不过滤 -->
 	<security:http pattern="/admin/login.jsp" security="none" />
-	<security:http access-denied-page="/error/403.jsp" />
 
-	<security:http use-expressions="true">
-		<!-- 登录页面和忘记密码页面不过滤 -->
-
-		<security:form-login login-page="/admin/login.jsp" authentication-failure-url="/admin/login.jsp?error=true" default-target-url="/admin/index.jsp" login-processing-url="/account/login" />
-		<!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中）  -->
+	<security:http access-denied-page="/error/403.jsp">
+		<security:intercept-url pattern="/**" access="ROLE_ADMIN" />
+		<security:form-login login-page="/admin/login.jsp" authentication-failure-url="/admin/login.jsp?error=true" default-target-url="/admin/singleindex.jsp"/>
+		<!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中） -->
 		<security:remember-me />
-
 		<security:logout logout-url="/account/logout" />
-
-		<!-- 检测失效的sessionId,超时时定位到另外一个URL <security:session-management invalid-session-url="/sessionTimeout.jsp" /> -->
-
+		<!-- 检测失效的sessionId,超时时定位到另外一个URL -->
+		<security:session-management invalid-session-url="/sessionTimeout.jsp" />
 		<!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前， 实现用户、角色、权限、资源的数据库管理。 -->
 		<security:custom-filter ref="myFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
-
 	</security:http>
-	
+
 	<!-- 注意能够为authentication-manager 设置alias别名 -->
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider user-service-ref="userDetailsManager">
@@ -84,5 +81,5 @@
 			</security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
+
 </beans>
