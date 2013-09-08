@@ -60,7 +60,7 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
 		Collection<ConfigAttribute> atts2 = new ArrayList<ConfigAttribute>();
 		ConfigAttribute ca2 = new SecurityConfig("ROLE_ADMIN");
 		atts2.add(ca2);
-		resourceMap.put("/admin/index.jsp", atts2);
+		resourceMap.put("/admin/singleindex.jsp", atts2);
 		resourceMap.put("/account/login", atts2);
 
 	}

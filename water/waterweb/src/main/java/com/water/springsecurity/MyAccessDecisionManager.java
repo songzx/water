@@ -3,6 +3,8 @@ package com.water.springsecurity;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MyAccessDecisionManager implements AccessDecisionManager {
+	private static Logger logger = LoggerFactory.getLogger(MyAccessDecisionManager.class);
 
 	@Override
 	public void decide(Authentication authentication, Object obj, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
@@ -37,6 +40,9 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
 					return;
 				}
 			}
+		}
+		if(logger.isDebugEnabled()){
+			System.out.println("用户没有角色权限");
 		}
 		throw new AccessDeniedException("用户没有角色权限");
 	}

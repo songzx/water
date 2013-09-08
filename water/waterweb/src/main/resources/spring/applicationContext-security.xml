@@ -61,8 +61,8 @@
 	<!-- 登录页面和忘记密码页面不过滤 -->
 	<security:http pattern="/admin/login.jsp" security="none" />
 
-	<security:http access-denied-page="/error/403.jsp">
-		<security:intercept-url pattern="/**" access="ROLE_ADMIN" />
+	<security:http access-denied-page="/error/securityerrrerror.jsp">
+		<security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<security:form-login login-page="/admin/login.jsp" authentication-failure-url="/admin/login.jsp?error=true" default-target-url="/admin/singleindex.jsp"/>
 		<!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中） -->
 		<security:remember-me />
