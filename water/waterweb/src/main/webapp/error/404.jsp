@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-错误
+错误404
 </body>
 </html>
