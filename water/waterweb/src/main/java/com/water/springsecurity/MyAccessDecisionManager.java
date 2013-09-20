@@ -42,7 +42,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
 			}
 		}
 		if(logger.isDebugEnabled()){
-			System.out.println("用户没有角色权限");
+			logger.debug("用户没有角色权限");
 		}
 		throw new AccessDeniedException("用户没有角色权限");
 	}

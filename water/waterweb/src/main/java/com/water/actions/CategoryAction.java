@@ -5,16 +5,22 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.water.basictool.ValidateUtil;
 import com.water.metamodel.tree.Category;
 import com.water.services.ICategoryService;
 
 @Component("categoryAction")
 @Scope("prototype")
-public class CategoryAction extends ParentAction {
+public class CategoryAction extends ActionSupport {
+
+	private static Logger logger = LoggerFactory.getLogger(CategoryAction.class);
+
 	private Category category;
 	@Resource
 	private ICategoryService categoryService;
@@ -38,8 +44,6 @@ public class CategoryAction extends ParentAction {
 		ServletActionContext.getRequest().setAttribute("categorys", categorys);
 		return SUCCESS;
 	}
-
-	
 
 	/**
 	 * 分页查询
@@ -75,4 +79,14 @@ public class CategoryAction extends ParentAction {
 		this.categoryService = categoryService;
 	}
 
+	public String list(){
+		PageBean pageBean = new PageBean();
+		pageBean.setPageSize(ValidateUtil.getInstance().checkInt(ServletActionContext.getRequest().getParameter("pageSize"), 2, 100));
+		pageBean.setCurPage(ValidateUtil.getInstance().checkInt(ServletActionContext.getRequest().getParameter("curPage"), 1));
+		pageBean.getParams().putAll(ServletActionContext.getRequest().getParameterMap());
+		
+		this.getCategoryService().list(pageBean);
+		ServletActionContext.getRequest().setAttribute("pageBean", pageBean);
+		return "list";
+	}
 }

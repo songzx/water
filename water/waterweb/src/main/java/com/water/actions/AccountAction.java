@@ -33,30 +33,8 @@ public class AccountAction extends ActionSupport {
 	private Account account;
 
 	public String login() {
-		// String logincode =
-		// ServletActionContext.getRequest().getParameter("logincode");
-		// String loginpasswd =
-		// ServletActionContext.getRequest().getParameter("loginpasswd");
-
-		Object obj = ServletActionContext.getRequest().getSession().getAttribute("loginaccount");
-		// entityManager.createQuery("select category from Category category where category.parentid = '0'",
-		// Category.class).getResultList()
-		if (obj != null) {
-			// 获取用户的栏目权限
-			String accountid = ServletActionContext.getRequest().getSession().getAttribute("accountid").toString();
-			List<Category> categories = this.getAccountService().getCategories(accountid, "0");
-			ServletActionContext.getRequest().setAttribute("categories", categories);
-			return SUCCESS;
-		}
-
-		Account taccount = this.getAccountService().getAccount(account.getLogincode(), account.getLoginpasswd());
-		if (taccount == null) {
-			return "login";
-		}
-		List<Category> categories = this.getAccountService().getCategories(taccount.getId(), "0");
-		ServletActionContext.getRequest().setAttribute("categories", categories);
-
-		loginWebBusiness(taccount);
+		logger.info("登陆！！１");
+		
 		return SUCCESS;
 	}
 

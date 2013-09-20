@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.water.actions.PageBean;
 import com.water.daos.CategoryDao;
 import com.water.metamodel.tree.Category;
 
@@ -28,6 +29,11 @@ public class CategoryService implements ICategoryService{
 
 	public void setCategoryDao(CategoryDao categoryDao) {
 		this.categoryDao = categoryDao;
+	}
+
+	@Override
+	public PageBean list(PageBean pageBean) {
+		return this.getCategoryDao().list(pageBean);
 	}
 
 }

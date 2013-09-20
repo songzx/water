@@ -1,4 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String accountid = "4EE9C8F0F12E11E2BF63E4517F000001";//(String)session.getAttribute("accountid");
+String parentid = request.getParameter("parentid") == null ? "":request.getParameter("parentid");
+if("".equals(parentid)){
+	out.println("不存在目录树");
+	return;
+}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +17,7 @@
 <script type="text/javascript" src="/waterweb/jstree/jquery.jstree.js"></script>
 <script type="text/javascript">
 	$(function() {
-		var v_jstree_url = "/waterweb/admin/category/tmp/category.xml";
+		var v_jstree_url = "/waterweb/admin/category/tmp/"+$('input[type=hidden][name=accountid]').val()+"_"+$('input[type=hidden][name=parentid]').val()+".xml";
 		$("#category").jstree({
 			"xml_data" : {
 				"ajax" : {
@@ -22,26 +30,9 @@
 			],
 			"contextmenu": {
 				"items": {
-					"create": {
-						"label": "添加菜单",
-						"action": function (obj) { 
-							$('#content', parent.document).load("/waterweb/admin/category/add.jsp?parentid="+obj.attr("id"));
-						}
-					},
-					"rename": {
-						"label": "编辑菜单",
-						"action": function (obj) { 
-							$('#content', parent.document).load("/waterweb/admin/category/modify.jsp?parentid="+obj.attr("id"));
-						}
-					},
-					"remove": {
-						"label": "删除菜单",
-						"action": function (obj) { 
-							if(confirm("是否删除，若删除上级则会递归删除该数据")){
-								$('#content', parent.document).load("/waterweb/admin/category/list.jsp?parentid="+obj.attr("id"));
-							}
-						}
-					},
+					"create": null,
+					"rename": null,
+					"remove": null,
 					"ccp": null
 				}
 			}
@@ -61,14 +52,14 @@
 				  $('#content', parent.document).attr('src',$(event.target).parents('li').eq(0).attr("href")+"?category="+$(event.target).parents('li').attr("id")+"&categoryname="+encodeURI($.trim($(event.target).parents('li').eq(0).text())));
                 }               
             }           
-		}).bind("loaded.jstree", function (e, data) { 
-            data.inst.open_all(-1); // -1 打开所有节点 
-        });
+		});
 	});
 
 </script>
 </head>
 <body>
+	<input type="hidden" name="accountid" value="<%=accountid %>"/>
+	<input type="hidden" name="parentid" value="<%=parentid %>"/>
 	<div id="category"></div>
 </body>
 </html>

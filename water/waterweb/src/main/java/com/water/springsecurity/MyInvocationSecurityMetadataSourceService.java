@@ -49,19 +49,27 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
 	 * 初始化资源
 	 */
 	private void loadResourceDefine() {
-
 		logger.info("初始化权限资源starting ----------------------");
-		resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
-		Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>();
 		ConfigAttribute ca = new SecurityConfig("ROLE_GUEST");
-		atts.add(ca);
-		resourceMap.put("/admin/singleindex.jsp", atts);
-
-		Collection<ConfigAttribute> atts2 = new ArrayList<ConfigAttribute>();
 		ConfigAttribute ca2 = new SecurityConfig("ROLE_ADMIN");
+		ConfigAttribute ca3 = new SecurityConfig("ROLE_SUPERADMIN");
+		
+		
+		Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>();
+		atts.add(ca);
+		atts.add(ca3);
+		atts.add(ca2);
+		
+		Collection<ConfigAttribute> atts2 = new ArrayList<ConfigAttribute>();
 		atts2.add(ca2);
-		resourceMap.put("/admin/singleindex.jsp", atts2);
+		
+		Collection<ConfigAttribute> atts3 = new ArrayList<ConfigAttribute>();
+		atts3.add(ca3);
+		
+		
+		resourceMap.put("/admin/singleindex.jsp", atts);
 		resourceMap.put("/account/login", atts2);
+		resourceMap.put("/admin/index.jsp", atts3);
 
 	}
 

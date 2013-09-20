@@ -2,6 +2,7 @@ package com.water.services;
 
 import java.util.List;
 
+import com.water.actions.PageBean;
 import com.water.metamodel.tree.Category;
 
 public interface ICategoryService {
@@ -12,5 +13,7 @@ public interface ICategoryService {
 	 * @return
 	 */
 	List<Category> cagetorylistbyaccount(String accountid,String parentid);
+
+	PageBean list(PageBean pageBean);
 
 }

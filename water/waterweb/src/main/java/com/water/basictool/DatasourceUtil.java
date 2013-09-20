@@ -73,7 +73,7 @@ public class DatasourceUtil {
 	}
 
 	public static DatasourceUtil getInstance() {
-		String propertiesfilepath = WebappPropertyUtil.getInstance().getWebappPath() + "WEB-INF/resources/basicconfig/datasource.properties";
+		String propertiesfilepath = WebappPropertyUtil.getInstance().getWebappPath() + "WEB-INF/classes/commonconfig/datasource.properties";
 		return getInstance(propertiesfilepath);
 	}
 

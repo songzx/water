@@ -62,13 +62,13 @@
 	<security:http pattern="/admin/login.jsp" security="none" />
 
 	<security:http access-denied-page="/error/securityerrrerror.jsp">
-		<security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/admin/**"/>
 		<security:form-login login-page="/admin/login.jsp" authentication-failure-url="/admin/login.jsp?error=true" default-target-url="/admin/singleindex.jsp"/>
 		<!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中） -->
 		<security:remember-me />
 		<security:logout logout-url="/account/logout" />
 		<!-- 检测失效的sessionId,超时时定位到另外一个URL -->
-		<security:session-management invalid-session-url="/sessionTimeout.jsp" />
+		<security:session-management invalid-session-url="/admin/sessiontimeout.jsp" />
 		<!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前， 实现用户、角色、权限、资源的数据库管理。 -->
 		<security:custom-filter ref="myFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
 	</security:http>

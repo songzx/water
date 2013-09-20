@@ -24,6 +24,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Collection<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
 		auths.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+		//auths.add(new GrantedAuthorityImpl("ROLE_SUPERADMIN"));
 		String passwd = "ceb4f32325eda6142bd65215f4c0f371";
 		UserDetails userDetails = new User(username, passwd, true, true, true, true, auths);
 		return userDetails;

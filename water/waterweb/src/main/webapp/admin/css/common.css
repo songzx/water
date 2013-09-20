@@ -1,0 +1,82 @@
+@CHARSET "UTF-8";
+
+body * {
+	font-size: 14px;
+}
+
+.tb {
+	border: solid 1px #ccd;
+	width: 100%;
+	font-size: 14px;
+	border-collapse: collapse;
+}
+
+.tb th {
+	font-weight: bold;
+	background-color: rgb(153, 247, 235);
+	text-align: center;
+	border: solid 1px #666;
+	padding: 5px;
+}
+
+.tb td {
+	padding: 5px;
+	border: 1px solid #666;
+	text-align: center;
+	max-width: 100px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-break: keep-all;
+}
+.td td:first-child{
+	text-align: center;
+}
+
+.tb tr:nth-child(even) td {
+	background-color: #ccc;
+}
+
+
+.tbform {
+	border: solid 1px #ccd;
+	width: 100%;
+	font-size: 14px;
+	border-collapse: collapse;
+}
+
+.tbform th {
+	font-weight: bold;
+	background-color: rgb(153, 247, 235);
+	text-align: center;
+	border: solid 1px #666;
+	padding: 5px;
+}
+
+.tbform td {
+	padding: 5px;
+	border: 1px solid #666;
+	text-align: left;
+	max-width: 100px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-break: keep-all;
+}
+
+.tbform tr:nth-child(even) td {
+	background-color: #ccc;
+}
+
+#操作区
+.divoper {
+	padding: 5px 0;
+	margin: 5px 0;
+}
+
+#导航区
+.divnav {
+	padding: 5px 0;
+	margin: 5px 0;
+	border:solid 1px #ccc;
+}

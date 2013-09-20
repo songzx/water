@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+import com.water.actions.PageBean;
 import com.water.metamodel.account.Account;
 import com.water.metamodel.tree.Category;
 
@@ -52,5 +53,23 @@ public class CategoryDao extends JpaBasiceDao{
 		
 	}
 
+	public PageBean list(PageBean pageBean) {
+		try {
+			Object count = entityManager.createQuery("select count(category) from Category category where category.name like :name and category.code like :code")
+					.setParameter("name", "%"+(pageBean.getParams().get("keyword")==null?"":pageBean.getParams().get("keyword"))+"%")
+					.setParameter("code", "%"+(pageBean.getParams().get("keyword")==null?"":pageBean.getParams().get("keyword"))+"%")
+					.getSingleResult();
+			pageBean.setTotalrows(Integer.parseInt(count == null ? "0" : count.toString()));
+
+			List result = entityManager.createQuery("select account from Category category where category.name like :name and category.code like :code")
+					.setParameter("name", "%"+(pageBean.getParams().get("keyword")==null?"":pageBean.getParams().get("keyword"))+"%")
+					.setParameter("code", "%"+(pageBean.getParams().get("keyword")==null?"":pageBean.getParams().get("keyword"))+"%").setFirstResult(pageBean.getStartrows()).setMaxResults(pageBean.getPageSize()).getResultList();
+			pageBean.setResult(result);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pageBean;
+	}
 	
 }

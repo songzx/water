@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.tbform {
+	border: solid 1px #ccd;
+	width: 100%;
+	font-size: 14px;
+	border-collapse: collapse;
+}
+
+.tbform th {
+	font-weight: bold;
+	background-color: rgb(153, 247, 235);
+	text-align: center;
+	border: solid 1px #666;
+	padding: 5px;
+}
+
+.tbform td {
+	padding: 5px;
+	border: 1px solid #666;
+	text-align: left;
+	max-width: 100px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-break: keep-all;
+}
+
+.tbform tr:nth-child(even) td {
+	background-color: #ccc;
+}
+</style>
+</head>
+<body>
+	<!-- 解决表格样式及其文字换行的问题 -->
+	<form action="" method="post" name="form1">
+		<table cellpadding="0" cellspacing="0" border="0" class="tbform">
+			<tr>
+				<td>标题</td>
+				<td><input type="text" name="name"/></td>
+			</tr>
+			<tr>
+				<td>标题</td>
+				<td><input type="text" name="name"/></td>
+			</tr>
+			<tr>
+				<td>标题</td>
+				<td><input type="text" name="name"/></td>
+			</tr>
+			<tr>
+				<td>标题</td>
+				<td><input type="text" name="name"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>事项分类管理</title>
+<title>Insert title here</title>
 </head>
 <body>
-<div style="float: left; display: block; overflow: auto; width: 240px;">
-<iframe src="/hp/admin/serviceitem/lefttree.jsp" frameborder="0" width="100%" height="100%" id="treeframe"></iframe>
-</div>
-<div>
-aaaaaaaaaaaa
-</div>
+session过期，请重新登陆　
 </body>
 </html>

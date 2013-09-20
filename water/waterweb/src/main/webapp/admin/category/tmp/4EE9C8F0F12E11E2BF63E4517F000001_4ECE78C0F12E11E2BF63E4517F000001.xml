@@ -1,1 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?><root><item id="FE92D7D0F14511E2877C29617F000001"><content><id><![CDATA[FE92D7D0F14511E2877C29617F000001]]></id><name><![CDATA[菜单管理]]></name><url><![CDATA[/waterweb/category/list]]></url></content></item><item id="FFAD4880F14511E2877C29617F000001"><content><id><![CDATA[FFAD4880F14511E2877C29617F000001]]></id><name><![CDATA[用户管理]]></name><url><![CDATA[/waterweb/account/list]]></url></content></item><item id="167B72D0F14611E2B14F36817F000001"><content><id><![CDATA[167B72D0F14611E2B14F36817F000001]]></id><name><![CDATA[勰缇怖翳磬]]></name><url><![CDATA[javascript:]]></url></content></item><item id="167D2080F14611E2B14F36817F000001"><content><id><![CDATA[167D2080F14611E2B14F36817F000001]]></id><name><![CDATA[涝茕蕹窠涡]]></name><url><![CDATA[javascript:]]></url></content></item></root>
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<item id="FFAD4880F14511E2877C29617F000001" href="/waterweb/admin/account/list.jsp">
+		<content>
+			<id><![CDATA[FFAD4880F14511E2877C29617F000001]]></id>
+			<name><![CDATA[用户管理]]></name>
+		</content>
+	</item>
+	<item id="167D2080F14611E2B14F36817F000001" href="/waterweb/admin/role/list.jsp">
+		<content>
+			<id><![CDATA[167D2080F14611E2B14F36817F000001]]></id>
+			<name><![CDATA[角色管理]]></name>
+		</content>
+	</item>
+	<item id="FE92D7D0F14511E2877C29617F000001" href="/waterweb/admin/category/list.jsp">
+		<content>
+			<id><![CDATA[FE92D7D0F14511E2877C29617F000001]]></id>
+			<name><![CDATA[菜单管理]]></name>
+		</content>
+	</item>
+	<item id="FE92D7D0F14511E2877C29617F000002" href="/waterweb/admin/resource/list.jsp">
+		<content>
+			<id><![CDATA[FE92D7D0F14511E2877C29617F000002]]></id>
+			<name><![CDATA[资源管理]]></name>
+		</content>
+	</item>
+	<item id="167B72D0F14611E2B14F36817F000001" href="/waterweb/admin/authz/list.jsp">
+		<content>
+			<id><![CDATA[167B72D0F14611E2B14F36817F000001]]></id>
+			<name><![CDATA[权限管理]]></name>
+		</content>
+	</item>
+
+</root>

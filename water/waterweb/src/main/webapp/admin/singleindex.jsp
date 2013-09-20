@@ -38,7 +38,7 @@ li {
 				
 				$('#navtab li').click(function(){
 					//$('#lefttree').load('/waterweb/admin/category/lefttree.jsp',{parentid:$(this).attr('id')},{});
-					$('#treeframe').attr('src','/waterweb/admin/category/lefttree.jsp?parentid='+$(this).attr('id'));
+					$('#treeframe').attr('src','/waterweb/admin/lefttree.jsp?parentid='+$(this).attr('id'));
 					$(this).css('border','solid 1px #ccc');
 					$(this).siblings().css('border','');
 					
@@ -82,7 +82,7 @@ li {
 				<iframe src="javascript:" frameborder="0" width="100%" height="550px" id="treeframe"></iframe>
 			</div>
 			<div style="margin-left: 246px; border: solid 1px #ccc; height: 550px;">
-			
+				<iframe src="javascript:" frameborder="0" width="100%" height="550px" id="content"></iframe>
 			</div>
 		</div>
 		<!-- 内容end -->
