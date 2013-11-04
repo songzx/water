@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.water</groupId>
@@ -25,6 +26,23 @@
 		<module>jmsactivemqserver</module>
 		<module>example</module>
 	</modules>
+	<repositories>
+		<repository>
+			<id>ucap-public</id>
+			<name>ucap-public</name>
+			<url>http://192.168.1.166:18081/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://192.168.1.166:18081/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
@@ -44,11 +62,12 @@
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa</artifactId> <version>2.2.0</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa</artifactId> 
+			<version>2.2.0</version> </dependency> -->
 		<dependency>
-			<groupId>ojdbc</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>11.2</version>
+			<groupId>ojdbc6</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>ojdbc6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -413,10 +432,16 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.11.2</version>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<!-- <extensions> <extension> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa-all</artifactId> <version>2.2.0</version> </extension> </extensions> -->
+		<!-- <extensions> <extension> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa-all</artifactId> 
+			<version>2.2.0</version> </extension> </extensions> -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -446,7 +471,9 @@
 					</additionalBuildcommands>
 				</configuration>
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat6-maven-plugin</artifactId> <version>2.0</version> <configuration> <port>8087</port> <uriEncoding>UTF-8</uriEncoding> </configuration> </plugin> -->
+			<!-- <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat6-maven-plugin</artifactId> 
+				<version>2.0</version> <configuration> <port>8087</port> <uriEncoding>UTF-8</uriEncoding> 
+				</configuration> </plugin> -->
 			<!-- 可调试（m2eclise+tomcat-maven-plugin插件） -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -472,45 +499,15 @@
 				</executions>
 			</plugin>
 
-			<!-- generate JPA 2.0 metamodel start <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId> <executions> <execution> <id>process</id> <goals> <goal>process</goal> </goals> <phase>generate-sources</phase> <configuration> <processors> <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor> 
-				</processors> </configuration> </execution> </executions> <dependencies> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-jpamodelgen</artifactId> <version>1.2.0.Final</version> </dependency> </dependencies> </plugin> -->
+			<!-- generate JPA 2.0 metamodel start <plugin> <groupId>org.bsc.maven</groupId> 
+				<artifactId>maven-processor-plugin</artifactId> <executions> <execution> 
+				<id>process</id> <goals> <goal>process</goal> </goals> <phase>generate-sources</phase> 
+				<configuration> <processors> <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor> 
+				</processors> </configuration> </execution> </executions> <dependencies> 
+				<dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-jpamodelgen</artifactId> 
+				<version>1.2.0.Final</version> </dependency> </dependencies> </plugin> -->
 			<!-- generate JPA 2.0 metamodel end -->
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>apache-commons</id>
-			<name>apache-commons</name>
-			<url>http://repo1.maven.org/maven2</url>
-		</repository>
-		<repository>
-			<id>spring-milestone</id>
-			<name>Spring Maven MILESTONE Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-		</repository>
-		<repository>
-			<id>spring-snnapshot</id>
-			<name>Spring Maven SNAPSHOT Repository</name>
-			<url>http://maven.springframework.org/snapshot</url>
-		</repository>
-		<repository>
-			<id>JBoss</id>
-			<name>JBoss Repsitory</name>
-			<url>http://repository.jboss.org/maven2</url>
-		</repository>
 
-		<repository>
-			<id>apache-snapshots</id>
-			<name>Apache SNAPSHOT Repository</name>
-			<url>http://repository.apache.org/snapshots/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>activemq</id>
-			<name>activemq SNAPSHOT Repository</name>
-			<url>https://repository.apache.org/content/repositories/snapshots/</url>
-		</repository>
-	</repositories>
 </project>

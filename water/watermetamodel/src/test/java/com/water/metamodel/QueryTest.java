@@ -51,7 +51,7 @@ public class QueryTest {
 
 	@Test
 	public void testQuery1() {
-		try {
+		try {net.sf.ehcache.util.UpdateChecker
 			entityManager.getTransaction().begin();
 			AccountAdmin account = new AccountAdmin();
 			account.setId("4EE66D90F12E11E2BF63E4517F000001");
