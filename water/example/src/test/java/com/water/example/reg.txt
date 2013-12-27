@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>无标题文档</title>
+<style type="text/css">
+<!--
+.style1 {
+	color: #C70910;
+	font-weight: bold;
+	font-size: 16px;
+}
+body,td,th {
+	font-size: 14px; 
+	line-height:120%; 
+}
+A:link 	  {font-size: 12px;  COLOR: #000000; TEXT-DECORATION: none; }
+A:visited {font-size: 12px;  COLOR: #000000; TEXT-DECORATION: none; }
+A:hover   {font-size: 12px;  COLOR: #ff0000; TEXT-DECORATION: none; }
+
+-->
+</style>
+</head>
+
+<body>
+
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center"><span class="style1">省局召开群众路线教育实践活动第三环..</span></td>
+  </tr>
+<tr>
+    <td align="right"><span><a href="/publicfiles/business/htmlfiles/gdfda/pzxdt/201311/264893.htm" target="_blank">[点击详情]</a></span></td>
+  </tr>
+  <tr>
+    <td style="padding-left:5px;padding-right:5px;"><P style="LINE-HEIGHT: 29pt; TEXT-INDENT: 32pt; MARGIN: 0cm 0cm 0pt; mso-char-indent-count: 2.0; mso-line-height-rule: exactly" class=MsoNormal align=center><IMG border=0 alt="" src="/publicfiles///business/htmlfiles/gdfda/cmsmedia/image/img38847original.jpg"></P>
+<P style="LINE-HEIGHT: 29pt; TEXT-INDENT: 32pt; MARGIN: 0cm 0cm 0pt; mso-char-indent-count: 2.0; mso-line-height-rule: exactly" class=MsoNormal>11月8日，省食品药品监督管理局召开党的群众路线教育实践活动整改落实、建章立制环节征求意见座谈会，征求对省局前一阶段开展教育实践活动各项工作情况的意见建议。省局机关各处室、直属各事业单位负责人和中层干部代表参加了会议。会议由驻局纪检组组长、监察专员、省局实践办主任陈鲁峰同志主持。</P>
+<P style="LINE-HEIGHT: 29pt; TEXT-INDENT: 32pt; MARGIN: 0cm 0cm 0pt; mso-char-indent-count: 2.0; mso-line-height-rule: exactly" class=MsoNormal>会上，陈鲁峰组织学习了省委教育实践活动领导小组《关于做好第一批教育实践活动整改落实、建章立制环节工作的通知》精神，对省局开展教育实践活动的前段工作“回头看”、聚焦“四风”抓整改、制度建设不放松等措施提出了具体的要求。各单位代表结合开展教育实践活动实际情况，提出了具有建设性的意见建议，有力地促进开展下一步教育实践活动的各项工作。</P>
+<P style="LINE-HEIGHT: 29pt; TEXT-INDENT: 32pt; MARGIN: 0cm 0cm 0pt; mso-char-indent-count: 2.0; mso-line-height-rule: exactly" class=MsoNormal>陈鲁峰要求，各单位要按照《省局教育实践活动整改落实、建章立制环节工作要点》的通知要求，对照教育实践活动中存在的问题和不足，认真抓好“补课”；对照“四风”制定专项整治方案，抓好整改；继续开门搞活动，广泛征求意见；着力抓好工作落实，将责任、措施落实到人；要做到思想上不放松、标准上不降低、力度上不减弱，确保省局教育实践活动善始善终、善作善成。（省局实践办供稿/图）</P></td>
+  </tr>
+<tr>
+    <td height="11"></td>
+  </tr>
+</table>
+
+</body>
+</html>

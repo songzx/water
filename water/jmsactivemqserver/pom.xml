@@ -6,9 +6,7 @@
 		<artifactId>water</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.water</groupId>
 	<artifactId>jmsactivemqserver</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>jmsactivemqserver</name>
 	<url>http://maven.apache.org</url>
 	<properties>
