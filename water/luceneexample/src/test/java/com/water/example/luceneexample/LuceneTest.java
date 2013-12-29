@@ -72,7 +72,11 @@ public class LuceneTest {
 	private FileFilter fileFilter = new FileFilter() {
 		@Override
 		public boolean accept(File pathname) {
-			if (pathname.canRead() && pathname.getName().endsWith(".txt")) {
+			System.out.println(pathname.getName());
+			if(pathname.isDirectory()){
+				return true;
+			}
+			if (pathname.canRead() && (pathname.getName().endsWith(".txt") || pathname.getName().endsWith(".html"))) {
 				return true;
 			}
 			return false;
@@ -83,7 +87,7 @@ public class LuceneTest {
 	public void init() throws Exception {
 		try {
 			indexdirector = new File("D:/luceneindex");
-			datadirectory = new File("D:/技术文档");
+			datadirectory = new File("D:\\coding\\testdata\\htmlfiles");
 			// analyzer = new StandardAnalyzer(Version.LUCENE_46);new
 			// ComplexAnalyzer("");
 			analyzer = new ComplexAnalyzer();
@@ -92,7 +96,7 @@ public class LuceneTest {
 			//seg = new MaxWordSeg(Dictionary.getInstance()); // 取得不同的分词具体算法
 			String path = LuceneTest.class.getResource("/").getPath()+"dicdata/";
 			seg = new MaxWordSeg(Dictionary.getInstance(path)); // 取得不同的分词具体算法
-
+			/*
 			IndexWriterConfig indexWriterConfig = new IndexWriterConfig(
 					Version.LUCENE_43, analyzer);
 			indexWriterConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
@@ -104,7 +108,7 @@ public class LuceneTest {
 				todocument(indexWriter, file);
 			}
 			// indexWriter.commit();
-			indexWriter.close();
+			indexWriter.close();*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -146,7 +150,7 @@ public class LuceneTest {
 			throws IOException {
 		if (file.isDirectory()) {
 			for (File tempfile : file.listFiles(fileFilter)) {
-				todocument(indexWriter, file);
+				todocument(indexWriter, tempfile);
 			}
 			return;
 		}
@@ -176,8 +180,8 @@ public class LuceneTest {
 
 	private void executeQuery(Query query, int n, Sort sort) {
 		try {
-			IndexSearcher indexSearcher = new IndexSearcher(
-					DirectoryReader.open(FSDirectory.open(indexdirector)));
+			long stime = System.currentTimeMillis();
+			IndexSearcher indexSearcher = new IndexSearcher(DirectoryReader.open(FSDirectory.open(indexdirector)));
 			TopDocs topDocs = indexSearcher.search(query, n, sort);
 			System.out.println("命中：" + topDocs.totalHits);
 			
@@ -187,6 +191,7 @@ public class LuceneTest {
 	        Highlighter highlight=new Highlighter(formatter,scorer);  
 	        highlight.setTextFragmenter(fragmenter);
 	        
+	        System.out.println(System.currentTimeMillis() - stime);
 	        
 			for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
 				System.out.println("权重：" + scoreDoc.score);
@@ -268,7 +273,7 @@ public class LuceneTest {
 	 */
 	@Test
 	public void testQuery4() throws ParseException {
-		String keywork = "左边的字符被匹配0次或者1次";
+		String keywork = "广州市的";
 		System.out.println(segWords(keywork, "|"));
 
 		BooleanQuery booleanQuery = new BooleanQuery();

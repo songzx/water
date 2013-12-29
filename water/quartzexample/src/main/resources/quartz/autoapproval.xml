@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job-scheduling-data
+	xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_2_0.xsd"
+	version="2.0">
+
+	<schedule>
+		<!-- job可以多个,用name标识;同一类可以对应多个job的name.同理trigger也一样. 格式: [秒] [分] [小时] [日] 
+			[月] [周] [年] -->
+		<job>
+			<name>autoapprovalfilterjob_803_0</name>
+			<group>autoapprovalfilterjob_803_job_group</group>
+			<description>本市常住户口人员申办边境通行证</description>
+			<job-class>com.ucap.gsm.autosp.realize.AutoApprovalFilterJob</job-class>
+			<job-data-map>
+				<entry>
+					<key>filterconditioncode</key>
+					<value>本市常住户口人员申办边境通行证_0</value>
+				</entry>
+			</job-data-map>
+		</job>
+		<trigger>
+			<cron>
+				<name>autoapprovalfilterjob_rigger_803_0</name>
+				<group>autoapprovalfilterjob_803_rigger_group</group>
+				<job-name>autoapprovalfilterjob_803_0</job-name>
+				<job-group>autoapprovalfilterjob_803_job_group</job-group>
+				<cron-expression>0 0/10 * * * ?</cron-expression>
+			</cron>
+		</trigger>
+
+
+	</schedule>
+</job-scheduling-data>
