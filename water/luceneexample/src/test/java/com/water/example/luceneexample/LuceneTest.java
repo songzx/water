@@ -88,15 +88,18 @@ public class LuceneTest {
 		try {
 			indexdirector = new File("D:/luceneindex");
 			datadirectory = new File("D:\\coding\\testdata\\htmlfiles");
+			String path = LuceneTest.class.getResource("/").getPath()+"dicdata/";
 			// analyzer = new StandardAnalyzer(Version.LUCENE_46);new
 			// ComplexAnalyzer("");
-			analyzer = new ComplexAnalyzer();
-			analyzer = new MaxWordAnalyzer();
+			//analyzer = new ComplexAnalyzer();
+			//自定义词库查询
+			analyzer = new ComplexAnalyzer(Dictionary.getInstance(path));
+			//analyzer = new MaxWordAnalyzer();
 
 			//seg = new MaxWordSeg(Dictionary.getInstance()); // 取得不同的分词具体算法
-			String path = LuceneTest.class.getResource("/").getPath()+"dicdata/";
-			seg = new MaxWordSeg(Dictionary.getInstance(path)); // 取得不同的分词具体算法
-			/*
+			
+			seg = new ComplexSeg(Dictionary.getInstance(path)); // 取得不同的分词具体算法
+			
 			IndexWriterConfig indexWriterConfig = new IndexWriterConfig(
 					Version.LUCENE_43, analyzer);
 			indexWriterConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
@@ -106,9 +109,10 @@ public class LuceneTest {
 			for (File file : datadirectory.listFiles(fileFilter)) {
 				System.out.println(file.getName());
 				todocument(indexWriter, file);
+				break;
 			}
 			// indexWriter.commit();
-			indexWriter.close();*/
+			indexWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -267,13 +271,15 @@ public class LuceneTest {
 	}
 
 	/**
-	 * 组合查询
+	 * 组合查询(
+	 * 自定义词库查询: analyzer = new ComplexAnalyzer(Dictionary.getInstance(path))
+	 * )
 	 * 
 	 * @throws ParseException
 	 */
 	@Test
 	public void testQuery4() throws ParseException {
-		String keywork = "广州市的";
+		String keywork = "朱小丹";
 		System.out.println(segWords(keywork, "|"));
 
 		BooleanQuery booleanQuery = new BooleanQuery();
@@ -288,8 +294,10 @@ public class LuceneTest {
 		//booleanQuery.add(numberquery, BooleanClause.Occur.MUST);
 		
 		BooleanClause.Occur[] flags = { BooleanClause.Occur.SHOULD,BooleanClause.Occur.SHOULD };// 
-		Query query = MultiFieldQueryParser.parse(Version.LUCENE_43, keywork,new String[] {"title", "content" }, flags, analyzer);
-		query.setBoost(0.8f);
+		//Query query = MultiFieldQueryParser.parse(Version.LUCENE_43, keywork,new String[] {"title", "content" }, flags, analyzer);
+		String path = LuceneTest.class.getResource("/").getPath()+"dicdata/";
+		Query query = MultiFieldQueryParser.parse(Version.LUCENE_43, keywork,new String[] {"title", "content" }, flags, new ComplexAnalyzer(Dictionary.getInstance(path)));
+		query.setBoost(1f);
 		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 		
 		
@@ -299,6 +307,6 @@ public class LuceneTest {
 			new SortField("modifydate", Type.LONG, true) // 倒序
 		};
 		Sort sort = new Sort(sortFields);
-		executeQuery(booleanQuery, 5, sort);
+		executeQuery(booleanQuery, 15, sort);
 	}
 }
