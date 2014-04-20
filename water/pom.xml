@@ -15,8 +15,9 @@
 		<cxf.version>2.2.3</cxf.version>
 		<struts2.version>2.3.15</struts2.version>
 		<hibernate.version>3.0.5</hibernate.version>
-		<spring.version>3.2.3.RELEASE</spring.version>
+		<spring.version>4.0.3.RELEASE</spring.version>
 		<spring-security.version>3.1.0.RELEASE</spring-security.version>
+		<tomcat.version>7.0.29</tomcat.version>
 	</properties>
 
 	<modules>
@@ -25,21 +26,22 @@
 		<module>jmsactivemqserver</module>
 		<module>example</module>
 		<module>luceneexample</module>
-    <module>quartzexample</module>
-    <module>rqcodeexample</module>
-  </modules>
+		<module>quartzexample</module>
+		<module>rqcodeexample</module>
+		<module>springmvcexample</module>
+	</modules>
 	<repositories>
 		<repository>
 			<id>ucap-public</id>
 			<name>ucap-public</name>
-			<url>http://192.168.1.166:18081/nexus/content/groups/public/</url>
+			<url>http://127.0.0.1:18081/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
-			<url>http://192.168.1.166:18081/nexus/content/groups/public/</url>
+			<url>http://127.0.0.1:18081/nexus/content/groups/public/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -48,10 +50,22 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-catalina</artifactId>
+			<version>${tomcat.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<version>${tomcat.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jasper</artifactId>
+			<version>${tomcat.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -64,12 +78,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa</artifactId> 
-			<version>2.2.0</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa</artifactId> <version>2.2.0</version> </dependency> -->
 		<dependency>
 			<groupId>ojdbc6</groupId>
 			<artifactId>ojdbc6</artifactId>
-			<version>ojdbc6</version>
+			<version>11g</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -180,6 +193,12 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
 			<version>1.2.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.3.1</version>
 		</dependency>
 
 		<dependency>
@@ -326,7 +345,11 @@
 			<artifactId>spring-jms</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -442,15 +465,14 @@
 	</dependencies>
 
 	<build>
-		<!-- <extensions> <extension> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa-all</artifactId> 
-			<version>2.2.0</version> </extension> </extensions> -->
+		<!-- <extensions> <extension> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa-all</artifactId> <version>2.2.0</version> </extension> </extensions> -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<compilerArgument>-proc:none</compilerArgument>
 				</configuration>
 			</plugin>
@@ -473,8 +495,7 @@
 					</additionalBuildcommands>
 				</configuration>
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat6-maven-plugin</artifactId> 
-				<version>2.0</version> <configuration> <port>8087</port> <uriEncoding>UTF-8</uriEncoding> 
+			<!-- <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat6-maven-plugin</artifactId> <version>2.0</version> <configuration> <port>8087</port> <uriEncoding>UTF-8</uriEncoding> 
 				</configuration> </plugin> -->
 			<!-- 可调试（m2eclise+tomcat-maven-plugin插件�? -->
 			<plugin>
@@ -501,13 +522,10 @@
 				</executions>
 			</plugin>
 
-			<!-- generate JPA 2.0 metamodel start <plugin> <groupId>org.bsc.maven</groupId> 
-				<artifactId>maven-processor-plugin</artifactId> <executions> <execution> 
-				<id>process</id> <goals> <goal>process</goal> </goals> <phase>generate-sources</phase> 
-				<configuration> <processors> <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor> 
-				</processors> </configuration> </execution> </executions> <dependencies> 
-				<dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-jpamodelgen</artifactId> 
-				<version>1.2.0.Final</version> </dependency> </dependencies> </plugin> -->
+			<!-- generate JPA 2.0 metamodel start <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId> <executions> <execution> <id>process</id> 
+				<goals> <goal>process</goal> </goals> <phase>generate-sources</phase> <configuration> <processors> <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor> 
+				</processors> </configuration> </execution> </executions> <dependencies> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-jpamodelgen</artifactId> <version>1.2.0.Final</version> 
+				</dependency> </dependencies> </plugin> -->
 			<!-- generate JPA 2.0 metamodel end -->
 		</plugins>
 	</build>
