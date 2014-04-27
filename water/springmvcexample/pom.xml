@@ -10,11 +10,11 @@
 	<packaging>war</packaging>
 	<name>springmvcexample Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-		
+
 	<properties>
 		<jackson.version>2.2.2</jackson.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -47,6 +47,11 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.dev.rome</groupId>
+			<artifactId>rome</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 	<build>
