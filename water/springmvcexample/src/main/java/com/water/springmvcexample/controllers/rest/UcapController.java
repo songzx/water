@@ -8,17 +8,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.water.springmvcexample.models.XmlModel;
 
 @Controller
+//@RestController
 @RequestMapping(value = "ucap", method = { RequestMethod.GET, RequestMethod.POST })
 public class UcapController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UcapController.class);
@@ -27,12 +32,17 @@ public class UcapController {
 	 * jsp
 	 * 
 	 * @param model
-	 * @return
 	 */
 	@RequestMapping("/example")
-	public String example(Model model) {
-		model.addAttribute("message", "Hello World!");
+	public String example(@RequestParam Map<String,Object> param, Model model) {
+		model.addAttribute("message", param.get("message"));
 		return "index";
+	}
+	
+	@RequestMapping("/index")
+	public String index(HttpServletRequest request){
+		LOGGER.info(request.getPathInfo());
+		return "admin/index";
 	}
 
 	/**
@@ -43,7 +53,6 @@ public class UcapController {
 	@RequestMapping(value = "/content", produces = "application/atom+xml")
 	public ModelAndView getContent() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("content");
 		
 		List<Map<String, Object>> result = new ArrayList<>();
 		Map<String, Object> tempmap = null;
@@ -66,7 +75,6 @@ public class UcapController {
 	@RequestMapping(value = "/contentjson", produces = "application/json")
 	public ModelAndView getContentjson() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("contentjson");
 		
 		List<Map<String, Object>> result = new ArrayList<>();
 		Map<String, Object> tempmap = null;
