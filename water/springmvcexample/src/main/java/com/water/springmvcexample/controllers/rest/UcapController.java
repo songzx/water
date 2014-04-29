@@ -44,6 +44,28 @@ public class UcapController {
 		LOGGER.info(request.getPathInfo());
 		return "admin/index";
 	}
+	
+	/**
+	 * free 源
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/content2", produces = "application/atom+xml")
+	public ModelAndView getContent2(ModelAndView mav) {
+		//mav = new ModelAndView();
+		
+		List<Map<String, Object>> result = new ArrayList<>();
+		Map<String, Object> tempmap = null;
+		for (int i = 0; i < 10; i++) {
+			tempmap = new HashMap<>();
+			tempmap.put("id", UUID.randomUUID().toString());
+			tempmap.put("content11", "<a>aa</a>");
+			result.add(tempmap);
+		}
+
+		mav.addObject("sampleContentList", result);
+		return mav;
+	}
 
 	/**
 	 * free 源

@@ -15,6 +15,8 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="com.water.springmvcexample.controllers.rest" />
+	<mvc:view-controller path="/login" view-name="login"/>
+	<mvc:resources location="/resources/css/" mapping="/css/**"/>
 	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
 	
@@ -23,8 +25,6 @@
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
 		<property name="interceptors">
 			<list>
-				<bean class="com.water.springmvcexample.interceptor.XssHandlerInterceptorAdapter">
-				</bean>
 				<bean class="com.water.springmvcexample.interceptor.LogHandlerInterceptorAdapter">
 					<property name="valuelength" value="1024" />
 				</bean>

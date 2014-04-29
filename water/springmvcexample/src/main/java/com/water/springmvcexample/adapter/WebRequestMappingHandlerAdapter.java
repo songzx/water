@@ -5,14 +5,17 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
-public class WebRequestMappingHandlerAdapter extends RequestMappingHandlerAdapter{
+
+public class WebRequestMappingHandlerAdapter extends DispatcherServlet{
+
 	@Override
-	protected final ModelAndView handleInternal(HttpServletRequest request,
-			HttpServletResponse response, HandlerMethod handlerMethod) throws Exception {
-		
+	protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		//super.doDispatch(new MyHttpServletRequestWrapper(request), response);
 	}
 
 }
