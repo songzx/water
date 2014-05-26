@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -87,7 +88,8 @@ public class LuceneTest {
 	public void init() throws Exception {
 		try {
 			indexdirector = new File("D:/luceneindex");
-			datadirectory = new File("D:\\coding\\testdata\\htmlfiles");
+			datadirectory = new File("D:\\coding\\testdata\\htmlfiles\\200rdzx");
+			
 			String path = LuceneTest.class.getResource("/").getPath()+"dicdata/";
 			// analyzer = new StandardAnalyzer(Version.LUCENE_46);new
 			// ComplexAnalyzer("");
@@ -109,9 +111,9 @@ public class LuceneTest {
 			for (File file : datadirectory.listFiles(fileFilter)) {
 				System.out.println(file.getName());
 				todocument(indexWriter, file);
-				break;
+				//break;
 			}
-			// indexWriter.commit();
+			indexWriter.commit();
 			indexWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,10 +171,10 @@ public class LuceneTest {
 			// 不存储内容
 			//document.add(new TextField("content",new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"))));
 
-			document.add(new LongField("modifydate", file.lastModified(),
-					Field.Store.YES));
+			document.add(new LongField("modifydate", file.lastModified(),Field.Store.YES));
 
-			indexWriter.addDocument(document);
+			//indexWriter.addDocument(document);
+			indexWriter.updateDocument(new Term("path", file.getAbsolutePath()),document);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -279,7 +281,7 @@ public class LuceneTest {
 	 */
 	@Test
 	public void testQuery4() throws ParseException {
-		String keywork = "朱小丹";
+		String keywork = "rdyt";
 		System.out.println(segWords(keywork, "|"));
 
 		BooleanQuery booleanQuery = new BooleanQuery();
@@ -309,4 +311,5 @@ public class LuceneTest {
 		Sort sort = new Sort(sortFields);
 		executeQuery(booleanQuery, 15, sort);
 	}
+	
 }

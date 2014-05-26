@@ -8,12 +8,15 @@
 		<artifactId>water</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.water.metamodel</groupId>
-	<artifactId>watermetamodel</artifactId>
-	<name>watermetamodel</name>
+	<groupId>com.water</groupId>
+	<artifactId>struts2example</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>struts2example Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
+	<dependencies>
+	</dependencies>
+	<build>
+		<finalName>struts2example</finalName>
+	</build>
 </project>

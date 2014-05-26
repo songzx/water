@@ -61,6 +61,7 @@ public class SegWorkTest {
 	public void testseg2() {
 		String keywork = "朱小丹";
 		String strs = segWords(keywork, "|");
+		System.out.println(strs);
 		Assert.assertEquals("朱小丹", strs);
 	}
 	

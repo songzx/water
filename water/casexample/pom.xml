@@ -8,12 +8,18 @@
 		<artifactId>water</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.water.metamodel</groupId>
-	<artifactId>watermetamodel</artifactId>
-	<name>watermetamodel</name>
+	<artifactId>casexample</artifactId>
+	<packaging>war</packaging>
+	<name>casexample Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
+	<dependencies>
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-core</artifactId>
+			<version>4.0.0-RC3</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>casexample</finalName>
+	</build>
 </project>
