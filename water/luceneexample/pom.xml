@@ -8,6 +8,7 @@
 		<artifactId>water</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	
 	<artifactId>luceneexample</artifactId>
 	<name>luceneexample</name>
 	<url>http://maven.apache.org</url>
@@ -48,6 +49,7 @@
 			<artifactId>mmseg4j-analysis</artifactId>
 			<version>1.9.1</version>
 		</dependency>
+		
 	</dependencies>
 
 </project>
