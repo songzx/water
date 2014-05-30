@@ -28,10 +28,8 @@
 		<module>example</module>
 		<module>luceneexample</module>
 		<module>quartzexample</module>
-		<module>rqcodeexample</module>
 		<module>casexample</module>
 		<module>struts2example</module>
-		<module>quartzexample</module>
 		<module>rqcodeexample</module>
 		<module>springmvcexample</module>
 	</modules>
